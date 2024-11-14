@@ -1,0 +1,20 @@
+# Configuración mantenimiento proyecto.
+path_insumos : "Insumos/"
+
+directorio_aviones:
+  nom_base: "aviones_compania_final.xlsx"
+  nom_hoja: "Directorio_Aviones"
+  dict_cols:
+   "matricula": "matricula"
+   "tipo": "tipo"
+   "modelo": "modelo"
+   "fabricante": "fabricante"
+   "propietario": "propietario"
+   "horas_vuelo": "horas_vuelo"
+   "capacidad_pasajeros": "capacidad_pasajeros"
+   "peso_maximo_equipaje": "peso_maximo_equipaje"
+   "disponible": "disponible"
+   "horas_ultimo_mantenimiento": "horas_ultimo_mantenimiento"
+   "necesita_mantenimiento": "necesita_mantenimiento"
+
+
