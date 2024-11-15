@@ -19,78 +19,37 @@ class GestionFBO:
         self.__vuelos.append(vuelo)
 
 
-import pandas as pd
-
 class Avion:
-    def __init__(self, df, config, matricula=None):
-        """
-        Inicializa una instancia de Avion para operar sobre un DataFrame existente.
-        Puede utilizar la matrícula para buscar un avión específico o trabajar con el DataFrame completo.
 
-        :param df: DataFrame que contiene la información de los aviones.
-        :param matricula: Matrícula del avión específico (opcional).
-        """
-        self.df = df
-        self.config = config
-        
-        self.cols_direct = self.config["directorio_aviones"]["dict_cols"]
-        if matricula:
-            self.matricula = matricula
-            self.avion_data = df[df[self.cols_direct['matricula']] == matricula]
-        else:
-            self.matricula = None
-            self.avion_data = None
+    def __init__(self, matricula, tipo, modelo, fabricante, propietario, horas_vuelo, capacidad_pasajeros, peso_maximo_equipaje, disponible, horas_ultimo_mantenimiento, necesita_mantenimiento):
+        self.__matricula = matricula
+        self.__descripcion = {
+            "Tipo": tipo,
+            "Modelo": modelo,
+            "Fabricante": fabricante,
+            "Propietario": propietario
+        }
+        self.__horas_vuelo = horas_vuelo
+        self.__capacidad_pasajeros = capacidad_pasajeros
+        self.__peso_maximo_equipaje = peso_maximo_equipaje
+        self.__disponible = disponible
+        self.__horas_ultimo_mantenimiento = horas_ultimo_mantenimiento
+        self.__necesita_mantenimiento = necesita_mantenimiento
 
-    def obtener_informacion_avion(self):
-        """
-        Devuelve la información completa de un avión específico según su matrícula.
-        """
-        if self.avion_data is not None:
-            return self.avion_data
-        else:
-            return "No se ha especificado una matrícula o el avión no existe en el DataFrame."
+    def verificar_disponibilidad(self):
+        return self.__disponible
 
-    def actualizar_horas_vuelo(self, horas):
-        """
-        Actualiza las horas de vuelo de un avión específico.
+    def set_disponibilidad(self, disponible):
+        self.__disponible = disponible
 
-        :param horas: Número de horas de vuelo para actualizar.
-        """
-        if self.avion_data is not None:
-            self.df.loc[self.df['matricula'] == self.matricula, 'horas_vuelo'] = horas
-        else:
-            print("No se ha especificado una matrícula o el avión no existe en el DataFrame.")
+    def get_peso_maximo_equipaje(self):
+        return self.__peso_maximo_equipaje
 
-    def realizar_mantenimiento(self):
-        """
-        Marca el avión como mantenido, actualizando las horas desde el último mantenimiento a 0.
-        """
-        if self.avion_data is not None:
-            self.df.loc[self.df['matricula'] == self.matricula, 'horas_ultimo_mantenimiento'] = 0
-            self.df.loc[self.df['matricula'] == self.matricula, 'necesita_mantenimiento'] = False
-        else:
-            print("No se ha especificado una matrícula o el avión no existe en el DataFrame.")
+    def get_capacidad_pasajeros(self):
+        return self.__capacidad_pasajeros
 
-    @staticmethod
-    def aviones_necesitan_mantenimiento(df):
-        """
-        Devuelve un DataFrame con los aviones que necesitan mantenimiento.
-
-        :param df: DataFrame que contiene la información de los aviones.
-        :return: DataFrame filtrado con los aviones que necesitan mantenimiento.
-        """
-        return df[df['necesita_mantenimiento'] == True]
-
-    @staticmethod
-    def aviones_disponibles(df):
-        """
-        Devuelve un DataFrame con los aviones disponibles.
-
-        :param df: DataFrame que contiene la información de los aviones.
-        :return: DataFrame filtrado con los aviones disponibles.
-        """
-        return df[df['disponible'] == True]
-
+    def verificar_mantenimiento(self):
+        return self.__necesita_mantenimiento or (self.__horas_vuelo - self.__horas_ultimo_mantenimiento >= 400)
 
 
 class Empleado:
@@ -138,8 +97,7 @@ class Mantenimiento:
         self.__espacio_hangar_disponible = espacio_hangar_disponible
         self.__prioridad = prioridad
         self.__horas_ultimo_mantenimiento = 0
-        self.__necesita_mantenimiento = False 
-        self.__mantenimiento_historial = []
+        self.__necesita_mantenimiento = False
         self.__historial_servicios = []
 
     def registrar_mantenimiento(self, descripcion: str, fecha: datetime, componentes_cambiados: List[str]):
