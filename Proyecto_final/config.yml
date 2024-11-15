@@ -17,4 +17,107 @@ directorio_aviones:
    "horas_ultimo_mantenimiento": "horas_ultimo_mantenimiento"
    "necesita_mantenimiento": "necesita_mantenimiento"
 
+opcion_regresar :  &opcion_regresar
+  0 : "Regresar al menu principal"
 
+Menu: 
+  menu_opcion: 
+    1 : "Avion"
+    2 : "Hangar"
+    3 : "Empleado"
+    4 : "Tripulacion"
+    5 : "Mantenimiento"
+    6 : "Servicios"
+    7 : "Vuelo"
+    8 : "Pasajero"
+    0 : "Salir" 
+
+Opciones: 
+  Avion:
+    string_menu:
+      1: "Ingresar a los procesos de gestión de Avión"
+      2: "Ingresar a los procesos de gestión de Hangar"
+      3: "Ingresar a los procesos de gestión de Empleado"
+      4: "Ingresar a los procesos de gestión de Tripulación"
+      5: "Ingresar a los procesos de gestión de Mantenimiento"
+      6: "Ingresar a los procesos de gestión de Servicios"
+      7: "Ingresar a los procesos de gestión de Vuelo"
+      8: "Ingresar a los procesos de gestión de Pasajero"
+      0: "Regresar al menu principal"
+  Hangar: 
+    string_menu:
+        1: "Ingresar a los procesos de gestión de Avión"
+        2: "Ingresar a los procesos de gestión de Hangar"
+        3: "Ingresar a los procesos de gestión de Empleado"
+        4: "Ingresar a los procesos de gestión de Tripulación"
+        5: "Ingresar a los procesos de gestión de Mantenimiento"
+        6: "Ingresar a los procesos de gestión de Servicios"
+        7: "Ingresar a los procesos de gestión de Vuelo"
+        8: "Ingresar a los procesos de gestión de Pasajero"
+        0: "Regresar al menu principal"
+  Empleado:
+    string_menu:
+        1: "Ingresar a los procesos de gestión de Avión"
+        2: "Ingresar a los procesos de gestión de Hangar"
+        3: "Ingresar a los procesos de gestión de Empleado"
+        4: "Ingresar a los procesos de gestión de Tripulación"
+        5: "Ingresar a los procesos de gestión de Mantenimiento"
+        6: "Ingresar a los procesos de gestión de Servicios"
+        7: "Ingresar a los procesos de gestión de Vuelo"
+        8: "Ingresar a los procesos de gestión de Pasajero"
+        0: "Regresar al menu principal"
+  Tripulacion:
+    string_menu:
+      1: "Ingresar a los procesos de gestión de Avión"
+      2: "Ingresar a los procesos de gestión de Hangar"
+      3: "Ingresar a los procesos de gestión de Empleado"
+      4: "Ingresar a los procesos de gestión de Tripulación"
+      5: "Ingresar a los procesos de gestión de Mantenimiento"
+      6: "Ingresar a los procesos de gestión de Servicios"
+      7: "Ingresar a los procesos de gestión de Vuelo"
+      8: "Ingresar a los procesos de gestión de Pasajero"
+      0: "Regresar al menu principal"
+  Mantenimiento:
+    string_menu:
+      1: "Ingresar a los procesos de gestión de Avión"
+      2: "Ingresar a los procesos de gestión de Hangar"
+      3: "Ingresar a los procesos de gestión de Empleado"
+      4: "Ingresar a los procesos de gestión de Tripulación"
+      5: "Ingresar a los procesos de gestión de Mantenimiento"
+      6: "Ingresar a los procesos de gestión de Servicios"
+      7: "Ingresar a los procesos de gestión de Vuelo"
+      8: "Ingresar a los procesos de gestión de Pasajero"
+      0: "Regresar al menu principal"
+  Servicios: 
+    string_menu:
+      1: "Ingresar a los procesos de gestión de Avión"
+      2: "Ingresar a los procesos de gestión de Hangar"
+      3: "Ingresar a los procesos de gestión de Empleado"
+      4: "Ingresar a los procesos de gestión de Tripulación"
+      5: "Ingresar a los procesos de gestión de Mantenimiento"
+      6: "Ingresar a los procesos de gestión de Servicios"
+      7: "Ingresar a los procesos de gestión de Vuelo"
+      8: "Ingresar a los procesos de gestión de Pasajero"
+      0: "Regresar al menu principal"
+  Vuelo: 
+    string_menu:
+      1: "Ingresar a los procesos de gestión de Avión"
+      2: "Ingresar a los procesos de gestión de Hangar"
+      3: "Ingresar a los procesos de gestión de Empleado"
+      4: "Ingresar a los procesos de gestión de Tripulación"
+      5: "Ingresar a los procesos de gestión de Mantenimiento"
+      6: "Ingresar a los procesos de gestión de Servicios"
+      7: "Ingresar a los procesos de gestión de Vuelo"
+      8: "Ingresar a los procesos de gestión de Pasajero"
+      0: "Regresar al menu principal"
+  Pasajero:
+    string_menu:
+      1: "Ingresar a los procesos de gestión de Avión"
+      2: "Ingresar a los procesos de gestión de Hangar"
+      3: "Ingresar a los procesos de gestión de Empleado"
+      4: "Ingresar a los procesos de gestión de Tripulación"
+      5: "Ingresar a los procesos de gestión de Mantenimiento"
+      6: "Ingresar a los procesos de gestión de Servicios"
+      7: "Ingresar a los procesos de gestión de Vuelo"
+      8: "Ingresar a los procesos de gestión de Pasajero"
+      0: "Regresar al menu principal"
