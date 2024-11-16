@@ -136,7 +136,6 @@ class PandasBaseTransformer:
         return df
 
 
-
     @staticmethod
     def Renombrar_columnas_con_diccionario(
         base: pd.DataFrame, cols_to_rename: dict

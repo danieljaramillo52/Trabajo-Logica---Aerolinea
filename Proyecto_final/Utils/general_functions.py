@@ -36,8 +36,13 @@ class ErrorHandler:
             f"{message} - Error occurred in file {call_frame.filename}, line {call_frame.lineno}"
         )
 
+
 def exportar_a_excel(
-    df: pd.DataFrame, ruta_guardado: str, nom_base: str,  nom_hoja: str, index: bool = False
+    df: pd.DataFrame,
+    ruta_guardado: str,
+    nom_base: str,
+    nom_hoja: str,
+    index: bool = False,
 ) -> None:
     """
     Exporta un dataframe de pandas a un archivo excel en la ruta especificada.
@@ -58,9 +63,7 @@ def exportar_a_excel(
     # Comprobar que la ruta de guardado existe
     try:
         logger.info(f"Exportando a excel: {nom_hoja}")
-        df.to_excel(
-            ruta_guardado + nom_base , sheet_name=nom_hoja, index=index
-        )
+        df.to_excel(ruta_guardado + nom_base, sheet_name=nom_hoja, index=index)
     except Exception as e:
         raise Exception
 
@@ -149,7 +152,7 @@ class ExcelReader:
     def __init__(self, path: str):
         self.path = path
 
-    @Registro_tiempo
+    #@Registro_tiempo
     def Lectura_insumos_excel(
         self, nom_insumo: str, nom_hoja: str, cols: int | list, skiprows: int
     ) -> pd.DataFrame:
@@ -162,7 +165,7 @@ class ExcelReader:
             range_cols = list(range(cols))
 
         try:
-            logger.info(f"Inicio lectura {nom_insumo} Hoja: {nom_hoja}")
+            #logger.info(f"Inicio lectura {nom_insumo} Hoja: {nom_hoja}")
             base_leida = pd.read_excel(
                 self.path + nom_insumo,
                 sheet_name=nom_hoja,
@@ -171,27 +174,27 @@ class ExcelReader:
                 dtype=str,
                 engine="openpyxl",
             )
-            logger.success(
-                f"Lectura de {nom_insumo} Hoja: {nom_hoja} realizada con éxito"
-            )
+            #logger.success(
+            #    f"Lectura de {nom_insumo} Hoja: {nom_hoja} realizada con éxito"
+            #)
             return base_leida
         except Exception as e:
             logger.error(f"Proceso de lectura fallido: {e}")
             raise Exception(f"Error al leer el archivo: {e}")
 
-    @Registro_tiempo
+    #@Registro_tiempo
     def Lectura_simple_excel(self, nom_insumo: str, nom_hoja: str) -> pd.DataFrame:
         """
         Lee un archivo de Excel únicamente utilizando el nombre de su hoja sin parámetros adicionales.
         """
         try:
-            logger.info(f"Inicio lectura simple de {nom_insumo}")
+            #logger.info(f"Inicio lectura simple de {nom_insumo}")
             base_leida = pd.read_excel(
                 self.path + nom_insumo,
                 sheet_name=nom_hoja,
                 dtype=str,
             )
-            logger.success(f"Lectura simple de {nom_insumo} realizada con éxito")
+            #logger.success(f"Lectura simple de {nom_insumo} realizada con éxito")
             return base_leida
         except Exception as e:
             logger.error(f"Proceso de lectura fallido: {e}")
@@ -219,7 +222,6 @@ def List_to_sql(values: list[str]):
     return ", ".join(f"'{value}'" for value in values)
 
 
-
 def crear_dict_col_llave_col_valores(df, columna_clave, columna_valores):
     """
     Crea un diccionario donde cada clave es un elemento único de una columna,
@@ -239,3 +241,8 @@ def crear_dict_col_llave_col_valores(df, columna_clave, columna_valores):
             df.loc[df[columna_clave] == clave, columna_valores].unique().tolist()
         )
     return diccionario
+
+def mostrar_menu_personalizado(eleccion, menu):
+    print(f"Menu de opciones para {eleccion}")    
+    for opcion, texto in menu.items():
+        print(f"{opcion}. {texto}")
