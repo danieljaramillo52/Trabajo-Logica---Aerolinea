@@ -16,6 +16,7 @@ directorio_aviones:
    "disponible": "disponible"
    "horas_ultimo_mantenimiento": "horas_ultimo_mantenimiento"
    "necesita_mantenimiento": "necesita_mantenimiento"
+  
 
 Menu:
   mensaje_principal: |
@@ -56,3 +57,4 @@ directorio_menu:
 
 dict_constantes :
   "Salir" : "Salir"
+

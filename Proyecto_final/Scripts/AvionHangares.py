@@ -69,6 +69,7 @@ class Avion:
         """
         self.__menu_avion = __menu_avion
         self.__config = __config
+        self.__eleccion = self.__config["Menu"]["menu_opcion"][1]
         self.cols_direct = self.__config["directorio_aviones"]["dict_cols"]
         
         # Obtener el DataFrame de aviones desde Hangar
@@ -89,13 +90,13 @@ class Avion:
         eleccion = self.__config["Menu"]["menu_opcion"][1]
         gf.mostrar_menu_personalizado(eleccion,self.__menu_avion)    
            
-    def ejecutar_proceso_avion(self):            
+    def ejecutar_proceso(self):            
         opcion_ingresada = input("Ingresa la opción a ejecutar:\n ")
-        resultado = self.ejecutar_proceso(opcion_ingresada)
+        resultado = self.ejecutar_proceso_avion(opcion_ingresada)
         return resultado
 
             
-    def ejecutar_proceso(self, opcion: str) -> bool:
+    def ejecutar_proceso_avion(self, opcion: str) -> bool:
         """
         Ejecuta la opción seleccionada por el usuario y devuelve si debe continuar gestionando procesos.
 
