@@ -36,7 +36,6 @@ class ErrorHandler:
             f"{message} - Error occurred in file {call_frame.filename}, line {call_frame.lineno}"
         )
 
-
 def exportar_a_excel(
     df: pd.DataFrame,
     ruta_guardado: str,
@@ -200,47 +199,6 @@ class ExcelReader:
             logger.error(f"Proceso de lectura fallido: {e}")
             raise Exception(f"Error al leer el archivo: {e}")
 
-
-def List_to_sql(values: list[str]):
-    """
-    Convierte una lista de valores en una cadena de valores SQL correctamenteformateada.
-    Parameters:
-    values (list of str): Lista de valores a convertir. Cada valor en la lista debeser una cadena (str).
-    Returns:
-    str: Una cadena de valores SQL separada por comas y entre comillas simples.
-    Raises:
-    TypeError: Si algún elemento de la lista no es una cadena (str).
-    ValueError: Si la lista está vacía.
-    """
-    if not values:
-        raise ValueError("La lista de valores no puede estar vacía.")
-    for value in values:
-        if not isinstance(value, str):
-            raise TypeError(
-                f"Todos los elementos de la lista deben ser cadenas (str). Elementoinválido: {value}"
-            )
-    return ", ".join(f"'{value}'" for value in values)
-
-
-def crear_dict_col_llave_col_valores(df, columna_clave, columna_valores):
-    """
-    Crea un diccionario donde cada clave es un elemento único de una columna,
-    y cada valor es una lista con los elementos correspondientes de otra columna.
-
-    Parámetros:
-    df (pd.DataFrame): El DataFrame del cual se extraerán los datos.
-    columna_clave (str): El nombre de la columna que se usará como claves del diccionario.
-    columna_valores (str): El nombre de la columna que se usará para los valores del diccionario.
-
-    Retorna:
-    dict: Un diccionario con las claves y valores especificados.
-    """
-    diccionario = {}
-    for clave in df[columna_clave].unique():
-        diccionario[clave] = (
-            df.loc[df[columna_clave] == clave, columna_valores].unique().tolist()
-        )
-    return diccionario
 
 def mostrar_menu_personalizado(eleccion, menu):
     print(f"Menu de opciones para {eleccion}")    

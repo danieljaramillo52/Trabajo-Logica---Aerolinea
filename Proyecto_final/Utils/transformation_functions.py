@@ -84,79 +84,6 @@ class PandasBaseTransformer:
         except Exception as e:
             logger.critical(f"Error en Cambiar_tipo_dato_multiples_columnas: {e}")
 
-    @staticmethod
-    def cols_a_num_seleccionado(df):
-        """
-        Intenta convertir todas las columnas de un DataFrame a tipo numérico.
-        Si una columna no puede ser convertida completamente a numérico, se deja sin cambios.
-
-        Args:
-        df (pd.DataFrame): DataFrame que contiene las columnas a convertir.
-
-        Returns:
-        pd.DataFrame: DataFrame con las columnas convertidas a tipo numérico cuando es posible.
-        """
-        for col in df.columns:
-            try:
-                if not isinstance(df, pd.DataFrame):
-                    raise TypeError(
-                        "El argumento 'df' debe ser un DataFrame de pandas."
-                    )
-
-                df[col] = df[col].astype(float)
-            except ValueError:
-                pass  # Si no puede convertir la columna, pasa a la siguiente
-        return df
-    
-    @staticmethod
-    def _eliminar_espacios_blanco_columnas(df, columnas):
-        """
-        Elimina los espacios en blanco al inicio y al final de los valores en las columnas
-        especificadas de un DataFrame.
-
-        Args:
-            df (pd.DataFrame): El DataFrame que contiene las columnas a limpiar.
-            columnas (str o list): Nombre de la columna o lista de nombres de
-                                columnas en las que se eliminarán los espacios
-                                en blanco.
-
-        Returns:
-            pd.DataFrame: El DataFrame con los espacios en blanco eliminados de las columnas
-                        especificadas.
-        """
-        # Si columnas es un solo nombre, convertirlo a lista
-        if isinstance(columnas, str):
-            columnas = [columnas]
-        # Aplicar str.strip() solo a las columnas especificadas
-        for columna in columnas:
-            if columna in df.columns and df[columna].dtype == "object":
-                df[columna] = df[columna].str.strip()
-            else:
-                print(f"La columna '{columna}' no existe o no es de tipo string.")
-        return df
-
-
-    @staticmethod
-    def Renombrar_columnas_con_diccionario(
-        base: pd.DataFrame, cols_to_rename: dict
-    ) -> pd.DataFrame:
-        """Funcion que toma un diccionario con keys ( nombres actuales ) y values (nuevos nombres) para remplazar nombres de columnas en un dataframe.
-        Args:
-            base: dataframe al cual se le harán los remplazos
-            cols_to_rename: diccionario con nombres antiguos y nuevos
-        Result:
-            base_renombrada: Base con las columnas renombradas.
-        """
-        base_renombrada = None
-
-        try:
-            base_renombrada = base.rename(columns=cols_to_rename, inplace=False)
-            logger.success("Proceso de renombrar columnas satisfactorio: ")
-        except Exception:
-            logger.critical("Proceso de renombrar columnas fallido.")
-            raise Exception
-
-        return base_renombrada
 
     def concatenate_dataframes(dataframes: list , join = "outer") -> pd.DataFrame:
         """
@@ -218,33 +145,6 @@ class PandasBaseTransformer:
 
         return result_df
 
-    @Registro_tiempo
-    def Transform_dfs_pandas_a_pyarrow(df: pd.DataFrame) -> pa.Table:
-        """
-        Función que toma un DataFrame de pandas y lo transforma en una tabla de PyArrow,
-        asegurándose de que no se transfiera ningún MultiIndex como una columna.
-
-        Args:
-        df (pd.DataFrame): DataFrame de pandas a ser transformado.
-
-        Returns:
-        pa.Table: Tabla bidimensional de datos de PyArrow.
-        """
-        try:
-            # Verificar si la entrada es un DataFrame de pandas
-            if not isinstance(df, pd.DataFrame):
-                raise TypeError("El argumento 'df' debe ser un DataFrame de pandas.")
-
-            # Resetear el índice si es MultiIndex para evitar columnas adicionales en PyArrow
-            if isinstance(df.index, pd.MultiIndex):
-                df = df.reset_index()
-
-            # Convertir el DataFrame de pandas a una tabla de PyArrow
-            table = pa.Table.from_pandas(df, preserve_index=False)
-        except Exception as e:
-            raise ValueError(f"Error al convertir el DataFrame a PyArrow: {e}") from e
-
-        return table
 
     @staticmethod
     def Seleccionar_columnas_pd(
@@ -313,47 +213,6 @@ class PandasBaseTransformer:
             # Registrar un mensaje crítico si hay un error
             logger.critical(f"Error: {ve}")
             raise ve
-
-    @staticmethod
-    def convertir_df_col_a_fecha(df: pd.DataFrame, columnas):
-        """
-        Convierte una o varias columnas de un DataFrame de cadenas de texto a fechas.
-
-        Parámetros:
-        df (pd.DataFrame): DataFrame que contiene las columnas a convertir.
-        columnas (str o list): Nombre de la columna o lista de columnas que contienen las fechas en formato de cadena.
-
-        Retorna:
-        pd.DataFrame: DataFrame con las columnas convertidas a formato de fecha.
-
-        Raises:
-        KeyError: Si alguna de las columnas especificadas no existe en el DataFrame.
-        """
-        # Si 'columnas' es un solo string, lo convertimos a una lista para la iteración
-        if isinstance(columnas, str):
-            columnas = [columnas]
-
-        for columna in columnas:
-            try:
-                # Verificar si la columna existe en el DataFrame
-                if columna not in df.columns:
-                    logger.error(f"La columna '{columna}' no existe en el DataFrame")
-                    raise KeyError(f"La columna '{columna}' no existe en el DataFrame")
-
-                # Intentar convertir la columna de fechas
-                df.loc[:, columna] = pd.to_datetime(df[columna], errors="coerce")
-                # Verificar si hay valores no convertidos (NaT)
-                if df[columna].isna().any():
-                    logger.warning(f"Algunos valores en la columna '{columna}' no se pudieron convertir a fecha y se establecieron como NaT.")
-                else:
-                    logger.info(f"Columna '{columna}' convertida a formato de fecha correctamente")
-
-            except Exception as e:
-                logger.critical(f"Error crítico al convertir la columna '{columna}' a fecha: {e}")
-                raise ValueError(f"Error crítico al convertir la fecha")
-
-        return df
-
 
 
 
@@ -597,27 +456,6 @@ class PandasBaseTransformer:
             else:
                 mask &= df[columna] == valores
         return df[mask]
-
-    @staticmethod
-    def agregar_cadena_a_serie_pd(df: pd.DataFrame, nom_col: str, cadena: str):
-        """
-        Agrega una cadena a cada elemento de una serie en un DataFrame de pandas.
-
-        Parámetros:
-        df (pd.DataFrame): El DataFrame al que se le va a agregar la cadena.
-        nom_col (str): El nombre de la serie a la que se le va a agregar la cadena.
-        cadena (str): La cadena que se va a agregar a cada elemento de la serie.
-
-        Retorna:
-        pd.DataFrame: El DataFrame actualizado.
-        """
-        if nom_col not in df.columns:
-            logger.error(f"La columna {nom_col} no esta en el dataframe")
-            raise ValueError(f"La columna {nom_col} no existe en el DataFrame.")
-
-        df[nom_col] = df[nom_col] + cadena
-        logger.success(f"Agregada la cadena {cadena} a toda la serie {nom_col}")
-        return df
 
     @staticmethod
     def pd_left_merge(
@@ -1015,30 +853,6 @@ class PandasBaseTransformer:
             )
             return None
 
-    def Agregar_multiples_cols_constantes(df: pd.DataFrame, dict_cols: dict):
-        """
-        Añade mutliples columnas con valores contantes de cualquier tipo, por medio de un diccionario de mapeo.
-
-        Args:
-            df (pd.DataFrame): DataFrame al que se añadirá la nueva columna.
-            dict_cols ( dict): Diccionario que contiene las columnas.
-              - keys ( Nombre de cada columna a agregar al dataframe).
-              - Values ( Valor constante de tipo int|str|float|bool)
-
-        Returns:
-            [pd.DataFrame, None]: DataFrame con la nueva columna añadida o None si ocurre un error.
-        """
-        try:
-            if not isinstance(df, pd.DataFrame):
-                raise TypeError("El argumento 'df' debe ser un DataFrame de pandas.")
-
-            # Intenta agregar las nuevas columnas usando assign
-            df_modificado = df.assign(**dict_cols)
-            return df_modificado
-
-        except Exception as e:
-            error_message = f"Error: {type(e).__name__}, {str(e)}"
-            raise (error_message, df)
 
     @Registro_tiempo
     def concatenar_dataframes(df_list: list[pd.DataFrame]):
@@ -1063,47 +877,4 @@ class PandasBaseTransformer:
             logger.critical(e)
             raise e
 
-    def duplicar_filas_segun_diccionario(
-        df: pd.DataFrame,
-        columna_clave: str,
-        dict_listas: dict,
-        nombre_nueva_columna: str,
-    ):
-        """
-        Duplica las filas de un DataFrame según los valores de un diccionario y agrega una nueva columna
-        con los elementos de la lista correspondiente en el diccionario.
 
-        Parámetros:
-        df (pd.DataFrame): El DataFrame original.
-        columna_clave (str): El nombre de la columna que se usará como clave en el diccionario.
-        dict_listas (dict): El diccionario donde las claves corresponden a los valores de la columna clave,
-                            y los valores son listas de elementos para duplicar las filas.
-        nombre_nueva_columna (str): El nombre de la nueva columna que contendrá los elementos de la lista.
-
-        Retorna:
-        pd.DataFrame: Un nuevo DataFrame con las filas duplicadas y la nueva columna.
-        """
-        # Crear una lista para almacenar los DataFrames resultantes
-        df_list = []
-        # Iterar sobre cada fila y duplicar según el diccionario
-        for valor_clave in df[columna_clave].unique():
-            if valor_clave in dict_listas:
-                # Filtrar las filas que corresponden a la clave actual
-                df_filtro = df[df[columna_clave] == valor_clave]
-                # Crear el DataFrame replicado
-                df_replicado = pd.DataFrame(
-                    np.repeat(df_filtro.values, len(dict_listas[valor_clave]), axis=0),
-                    columns=df.columns,
-                )
-                # Añadir la nueva columna con los valores de la lista del diccionario
-                df_replicado[nombre_nueva_columna] = dict_listas[valor_clave] * len(
-                    df_filtro
-                )
-                # Añadir el DataFrame replicado a la lista
-                df_list.append(df_replicado)
-
-        # Concatenar todos los DataFrames en uno solo
-
-        if len(df_list) > 0:
-            df_resultante = pd.concat(df_list, ignore_index=True)
-        return df_resultante
