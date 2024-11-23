@@ -407,6 +407,7 @@ class PandasBaseTransformer:
 
         # Mapea las operaciones a funciones de comparación que solo usan los argumentos necesarios
         operaciones = {
+            "igual": lambda x: x == valor_umbral,
             "mayor": lambda x: x > valor_umbral,
             "menor": lambda x: x < valor_umbral,
             "mayor_igual": lambda x: x >= valor_umbral,
@@ -417,11 +418,11 @@ class PandasBaseTransformer:
         # Selecciona la función de comparación
         if operacion not in operaciones:
             raise ValueError(
-                f"Operación inválida: '{operacion}'. Solo puedes ingresar las operaciones de esta lista: ['mayor', 'menor', 'mayor_igual', 'menor_igual', 'entre_a_b_valores']"
+                f"Operación inválida: '{operacion}'. Solo puedes ingresar las operaciones de esta lista: ['igual', 'mayor', 'menor', 'mayor_igual', 'menor_igual', 'entre_a_b_valores']"
             )
 
         # Validación de argumentos necesarios
-        if operacion in ["mayor", "menor", "mayor_igual", "menor_igual"] and valor_umbral is None:
+        if operacion in ["igual", "mayor", "menor", "mayor_igual", "menor_igual"] and valor_umbral is None:
             raise ValueError("Debes proporcionar 'valor_umbral' para la operación seleccionada.")
         if operacion == "entre_a_b_valores":
             if valor_min is None or valor_max is None:

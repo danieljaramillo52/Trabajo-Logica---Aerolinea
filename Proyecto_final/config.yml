@@ -4,19 +4,61 @@ path_insumos : "Insumos/"
 directorio_aviones:
   nom_base: "aviones_compania_final.xlsx"
   nom_hoja: "Directorio_Aviones"
-  dict_cols:
+  dict_cols_num: &cols_numeric
+    "horas_vuelo": "horas_vuelo"
+    "capacidad_pasajeros": "capacidad_pasajeros"
+    "peso_maximo_carga": "peso_maximo_carga"
+    "horas_ultimo_mantenimiento" : "horas_ultimo_mantenimiento"
+  dict_cols: 
+   <<: *cols_numeric
    "matricula": "matricula"
    "tipo": "tipo"
    "modelo": "modelo"
    "fabricante": "fabricante"
    "propietario": "propietario"
-   "horas_vuelo": "horas_vuelo"
-   "capacidad_pasajeros": "capacidad_pasajeros"
-   "peso_maximo_equipaje": "peso_maximo_equipaje"
    "disponible": "disponible"
-   "horas_ultimo_mantenimiento": "horas_ultimo_mantenimiento"
    "necesita_mantenimiento": "necesita_mantenimiento"
+  config_operaciones:
+    "igual": "Filtrar aviones con el valor exacto, ingresado para la col seleccionada."
+    "mayor": "Filtrar aviones de por encima del valor ingresado para la col seleccionada."
+    "menor": "Filtrar aviones por debajo del valor ingresado para la col seleccionada. "
+    "mayor_igual": "Filtrar valores mayores o iguales al valor ingresado para la col seleccionada. "
+    "menor_igual": "Filtrar valores menores o iguales al valor ingresado para la col seleccionada. "
+    "entre_a_b_valores": "Filtrar valores entre un rango definido para la col seleccionada "
+  dict_mensajes:
+    mensajes:
+      columnas_disponibles: "Opciones de columnas disponibles para filtrar por favor ingrese:"
+      ingresa_opcion: "Ingresa tu opción:"
+      opcion_no_valida: "La opción ingresada no es válida. Intente nuevamente."
+      entrada_no_valida: "Entrada no válida. Por favor, ingrese un número."
+      operacion_seleccione: "Seleccione la operación que desea realizar:"
+      operacion_no_valida: "Operación no válida. Opciones disponibles:"
+      ingrese_valor_min: "Ingrese el valor mínimo:"
+      ingrese_valor_max: "Ingrese el valor máximo:"
+      ingrese_umbral: "Ingrese el valor umbral:"
+      resultados_filtro: "Resultados del filtro en la columna:"
+
+
+directorio_empleados: 
+  nom_base: "empleados.xlsx"
+  nom_hoja: "Directorio_Empleados"
+  dict_cols: 
+    "Nombre": "Nombre"
+    "id_empleado": "ID_Empleado"
+    "rol": "Rol"
+    "documento_licencia": "Documento_Licencia"
+    "horas_vuelo": "Horas_Vuelo"
+    "estado_empleado": "Estado_Empleado"
+    "correo_electronico": "Correo_Electronico"
+    "disponible": "Disponible"
+    "ubicacion": "Ubicacion"   
   
+Resultados: 
+  repor_gen_hangar:
+    path_base:  Resultados/
+    nom_base: reporte_aviones_posibles_consultados.xlsx
+    nom_hoja: Reporte
+
 
 Menu:
   mensaje_principal: |
@@ -32,20 +74,18 @@ Menu:
     8.Ingresar a los procesos de gestión de Pasajero
     0.Salir
   menu_opcion: &opciones_menu
-    1 : "Avion"
-    2 : "Hangar"
-    3 : "Empleado"
-    4 : "Tripulacion"
-    5 : "Mantenimiento"
-    6 : "Servicios"
-    7 : "Vuelo"
-    8 : "Pasajero"
-    0 : "Salir"
-
+    "1" : "Avion"
+    "2" : "Hangar"
+    "3" : "Empleado"
+    "4" : "Tripulacion"
+    "5" : "Mantenimiento"
+    "6" : "Servicios"
+    "7" : "Vuelo"
+    "8" : "Pasajero"
+    "0" : "Salir"
 
 opcion_regresar :  &opcion_regresar
   0 : "Regresar al menu principal"
-
 
 directorio_menu: 
   nom_base : base_menus.xlsx
