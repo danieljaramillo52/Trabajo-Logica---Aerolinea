@@ -3,6 +3,8 @@ import general_functions as gf
 from loguru import logger
 from transformation_functions import PandasBaseTransformer as PBT
 from AvionHangares import Avion, Hangar
+from modulo_empleado import Empleados, Empleado
+from Pasajero import Pasajero
 from typing import Dict
 
 
@@ -14,11 +16,9 @@ class GestionFBO:
         """
         self.__config = config
 
-    def get_config(self) -> Dict:
-        """
-        Devuelve la configuración privada de la instancia.
-        return: Diccionario de configuración.
-        """
+    @property
+    def config(self) -> Dict:
+        """Return: Diccionario de configuración."""
         return self.__config
 
     @staticmethod
@@ -42,43 +42,42 @@ class GestionFBO:
             estado = clase_instancia.ejecutar_proceso()
 
     def _gestionar_hangar(self, menu: dict):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.get_config(), menu, matricula)
-        self.gestionar_ciclo(avion)
+        #matricula = input("Ingrese una matricula de la lista a consultar: ")
+        hangar = Hangar(self.config(), menu, PBT)
+        self.gestionar_ciclo(hangar)
 
     def _gestionar_empleado(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.get_config(), menu, matricula)
-        self.gestionar_ciclo(avion)
+        empleados = Empleados(self.config(), menu, matricula)
+        self.gestionar_ciclo(empleados)
 
     def _gestionar_tripulacion(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.get_config(), menu, matricula)
+        avion = Avion(self.config(), menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _gestionar_mantenimiento(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.get_config(), menu, matricula)
+        avion = Avion(self.config(), menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _gestionar_servicios(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.get_config(), menu, matricula)
+        avion = Avion(self.config(), menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _gestionar_vuelo(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.get_config(), menu, matricula)
+        avion = Avion(self.config(), menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _gestionar_pasajero(self, menu: dict):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.get_config(), menu, matricula)
-        self.gestionar_ciclo(avion)
+        pasajero = Pasajero(self.config(), menu)
+        self.gestionar_ciclo(pasajero)
 
     def _gestionar_avion(self, menu):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.get_config(), menu, matricula)
+        avion = Avion(self.config(), menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _menu_principal(self, dict_menus: dict):
@@ -89,17 +88,17 @@ class GestionFBO:
         """
         dict_menu_principal = self.__config["Menu"]["menu_opcion"]
         mensaje_menu = self.__config["Menu"]["mensaje_principal"]
-        opciones_validas = [int(k) for k in dict_menu_principal.keys()]
+        opciones_validas = [(k) for k in dict_menu_principal.keys()]
 
         while True:
             print(mensaje_menu)
             try:
-                opcion = int(input("Ingrese una opción: "))
+                opcion = input("Ingrese una opción: ")
                 if opcion not in opciones_validas:
                     logger.info(
                         f"No has ingresado una opción válida. Por favor, selecciona entre las opciones disponibles: {opciones_validas}"
                     )
-                elif opcion == 0:
+                elif opcion == "0":
                     logger.info("Saliendo del menú principal...")
                     break
                 else:
@@ -115,14 +114,14 @@ class GestionFBO:
         :param dict_menus: Diccionario que contiene los submenús asociados a cada opción.
         """
         submenus_acciones = {
-            1: ("Avion", self._gestionar_avion),
-            2: ("Hangar", self._gestionar_hangar),
-            3: ("Empleado", self._gestionar_empleado),
-            4: ("Tripulacion", self._gestionar_tripulacion),
-            5: ("Mantenimiento", self._gestionar_mantenimiento),
-            6: ("Servicios", self._gestionar_servicios),
-            7: ("Vuelo", self._gestionar_vuelo),
-            8: ("Pasajero", self._gestionar_pasajero),
+            "1": ("Avion", self._gestionar_avion),
+            "2": ("Hangar", self._gestionar_hangar),
+            "3": ("Empleado", self._gestionar_empleado),
+            "4": ("Tripulacion", self._gestionar_tripulacion),
+            "5": ("Mantenimiento", self._gestionar_mantenimiento),
+            "6": ("Servicios", self._gestionar_servicios),
+            "7": ("Vuelo", self._gestionar_vuelo),
+            "8": ("Pasajero", self._gestionar_pasajero),
         }
 
         if opcion in submenus_acciones:
@@ -143,7 +142,7 @@ class GenerarMenusFBO:
         :param gestion_fbo: Instancia de la clase GestionFBO para acceder a la configuración.
         """
         self.__gestion_fbo = gestion_fbo
-        self.__config = self.__gestion_fbo.get_config()
+        self.__config = self.__gestion_fbo.config()
 
         # Acceso directo a las claves necesarias
         self.__direc_menu = self.__config["directorio_menu"]

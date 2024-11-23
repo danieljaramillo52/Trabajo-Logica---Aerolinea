@@ -87,7 +87,6 @@ class Empleado:
 
 
 class Mantenimiento:
-
     def __init__(self, avion, lider_tecnico, combustible_disponible, espacio_hangar_disponible, prioridad):
         self.__avion = avion
         self.__mantenimiento_historial = []

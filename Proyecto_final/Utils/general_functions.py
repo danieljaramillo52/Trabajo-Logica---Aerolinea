@@ -200,6 +200,29 @@ class ExcelReader:
             raise Exception(f"Error al leer el archivo: {e}")
 
 
+def procesar_opcion(opcion, opciones):
+    """
+    Procesa la opción seleccionada por el usuario.
+
+    Args:
+        opcion (int): La opción seleccionada por el usuario.
+        opciones (dict): Diccionario con las opciones disponibles, donde las claves son enteros 
+                         y los valores son funciones asociadas.
+
+    Returns:
+        bool: `False` si la opción es "0" (salir), `True` en caso contrario.
+    """
+    if opcion in opciones:
+        if opcion == "0":  # Opción para salir directamente
+            return False
+        else:
+            resultado = opciones[opcion]()
+            print("Proceso terminado. \n")
+            return True
+    else:
+        print("Opción no válida. Intente nuevamente.")
+        return True
+
 def mostrar_menu_personalizado(eleccion, menu):
     print(f"Menu de opciones para {eleccion}")    
     for opcion, texto in menu.items():
