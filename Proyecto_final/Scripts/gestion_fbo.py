@@ -3,7 +3,7 @@ import general_functions as gf
 from loguru import logger
 from transformation_functions import PandasBaseTransformer as PBT
 from AvionHangares import Avion, Hangar
-from modulo_empleado import Empleados, Empleado
+from Scripts.ModuloEmpleado import Empleados, Empleado
 from Pasajero import Pasajero
 from typing import Dict
 
