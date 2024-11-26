@@ -1,7 +1,7 @@
 import pandas as pd
 from loguru import logger
 
-RUTA_EXCEL_PASAJEROS = "Insumos/pasajeros_sin_asiento.xlsx"
+RUTA_EXCEL_PASAJEROS = "Insumos/pasajeros.xlsx"
 """
 directorio_pasajeros: 
   nom_base: "pasajeros_sin_asiento.xlsx"
