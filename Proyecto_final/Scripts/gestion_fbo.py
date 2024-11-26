@@ -2,11 +2,11 @@ import config_path_routes
 import general_functions as gf
 from loguru import logger
 from transformation_functions import PandasBaseTransformer as PBT
-from Scripts.ModuloVuelo import Vuelo
 from Servicios import Servicios
+from ModuloTripulacion import Tripulacion, AdminTripulacion
 from AvionHangares import Avion, Hangar
-from Scripts.ModuloEmpleado import Empleados, Empleado
-from Pasajero import Pasajero
+from ModuloEmpleado import Empleados, Empleado
+from ModuloPasajeros import Pasajeros
 from typing import Dict
 from random import randint
 
@@ -45,7 +45,7 @@ class GestionFBO:
             estado = clase_instancia.ejecutar_proceso()
 
     def _gestionar_hangar(self, menu: dict):
-        #matricula = input("Ingrese una matricula de la lista a consultar: ")
+        # matricula = input("Ingrese una matricula de la lista a consultar: ")
         hangar = Hangar(self.config, menu, PBT)
         self.gestionar_ciclo(hangar)
 
@@ -55,9 +55,13 @@ class GestionFBO:
         self.gestionar_ciclo(empleados)
 
     def _gestionar_tripulacion(self, menu: dict):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config, menu, matricula)
-        self.gestionar_ciclo(avion)
+        
+        empleados_admin = Empleados(self.config)
+        
+        admin = AdminTripulacion(self.config,  menu, empleados_admin)
+        self.gestionar_ciclo(admin)
+        
+
 
     def _gestionar_mantenimiento(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
@@ -75,9 +79,8 @@ class GestionFBO:
         self.gestionar_ciclo(avion)
 
     def _gestionar_pasajero(self, menu: dict):
-        pasajero = Pasajero(self.config, menu)
+        pasajero = Pasajeros(config=self.config, menu=menu)
         self.gestionar_ciclo(pasajero)
-    
 
     def _gestionar_avion(self, menu: dict):
         """
@@ -92,7 +95,6 @@ class GestionFBO:
         avion = self._crear_instancia_avion(datos_avion, menu)
         self._gestionar_ciclo_avion(avion)
 
-
     def _generar_numero_aleatorio(self) -> int:
         """
         Genera un número aleatorio entre 1 y 10.
@@ -101,8 +103,8 @@ class GestionFBO:
             int: Número aleatorio generado.
         """
         from random import randint
-        return randint(1, 10)
 
+        return randint(1, 10)
 
     def _obtener_datos_avion(self, num_avion: int) -> dict:
         """
@@ -115,7 +117,6 @@ class GestionFBO:
             dict: Datos del avión, si existen en la configuración; de lo contrario, un diccionario vacío.
         """
         return self.config["directorio_aviones"]["aviones_ingresar"][num_avion]
-
 
     def _crear_instancia_avion(self, datos_avion: dict, menu: dict):
         """
@@ -132,9 +133,10 @@ class GestionFBO:
             print("Instancia del avión creada:", datos_avion["matricula"])
             return Avion(config=self.config, menu_avion=menu, **datos_avion)
         else:
-            print("No se encontraron datos para el avión. Creando instancia por defecto.")
+            print(
+                "No se encontraron datos para el avión. Creando instancia por defecto."
+            )
             return Avion(config=self.config, menu_avion=menu)
-
 
     def _gestionar_ciclo_avion(self, avion):
         """
@@ -146,7 +148,6 @@ class GestionFBO:
         # Aquí llamamos al método gestionar_ciclo con el avión creado
         self.gestionar_ciclo(avion)
 
-        
     def _menu_principal(self, dict_menus: dict):
         """
         Muestra el menú principal y permite al usuario seleccionar una opción.
@@ -188,7 +189,7 @@ class GestionFBO:
             "5": ("Mantenimiento", self._gestionar_mantenimiento),
             "6": ("Servicios", self._gestionar_servicios),
             "7": ("Vuelo", self._gestionar_vuelo),
-            "8": ("Pasajero", self._gestionar_pasajero),
+            "8": ("Pasajeros", self._gestionar_pasajero),
         }
 
         if opcion in submenus_acciones:

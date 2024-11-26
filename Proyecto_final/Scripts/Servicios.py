@@ -1,5 +1,5 @@
 from loguru import logger
-from Utils import general_functions as gf
+import general_functions as gf
 
 class Servicios:
     def __init__(self, __config, __menu_servicios=None, __PBT=None):

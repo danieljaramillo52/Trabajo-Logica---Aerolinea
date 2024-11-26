@@ -160,22 +160,30 @@ directorio_aviones:
      necesita_mantenimiento: "FALSO"
   
 
-
-
+directorio_pasajeros: 
+  nom_base: "pasajeros_sin_asiento.xlsx"
+  nom_hoja: "sheet1"
+  dict_cols: 
+    "nombre": "Nombre"
+    "documento_identidad": "Documento_Identidad"
+    "edad": "Edad"
+    "equipaje": "Equipaje"
+    "vuelo": "Vuelo"
+    "estado_reserva": "Estado_Reserva"
 
 directorio_empleados: 
   nom_base: "empleados.xlsx"
-  nom_hoja: "Directorio_Empleados"
+  nom_hoja: "Sheet1"
   dict_cols: 
     "Nombre": "Nombre"
-    "id_empleado": "ID_Empleado"
-    "rol": "Rol"
-    "documento_licencia": "Documento_Licencia"
-    "horas_vuelo": "Horas_Vuelo"
-    "estado_empleado": "Estado_Empleado"
-    "correo_electronico": "Correo_Electronico"
-    "disponible": "Disponible"
-    "ubicacion": "Ubicacion"   
+    "ID_Empleado": "ID_Empleado"
+    "Rol": "Rol"
+    "Documento_Licencia": "Documento_Licencia"
+    "Horas_Vuelo": "Horas_Vuelo"
+    "Estado_Empleado": "Estado_Empleado"
+    "Estado_Empleado": "Estado_Empleado"
+    "Disponible": "Disponible"
+    "Ubicacion": "Ubicacion"   
   
 Resultados: 
   repor_gen_hangar:
@@ -205,7 +213,7 @@ Menu:
     "5" : "Mantenimiento"
     "6" : "Servicios"
     "7" : "Vuelo"
-    "8" : "Pasajero"
+    "8" : "Pasajeros"
     "0" : "Salir"
 
 opcion_regresar :  &opcion_regresar
