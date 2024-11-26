@@ -1,7 +1,7 @@
 import pandas as pd
 from loguru import logger
 
-RUTA_EXCEL_PASAJEROS = "Insumos/pasajeros_sin_asiento.xlsx"
+RUTA_EXCEL_PASAJEROS = "Insumos/pasajeros.xlsx"
 """
 directorio_pasajeros: 
   nom_base: "pasajeros_sin_asiento.xlsx"
@@ -92,7 +92,7 @@ class Pasajeros:
             self._cols_df_pasajeros["vuelo"]: vuelo,
             self._cols_df_pasajeros["estado_reserva"]: estado_reserva,
         }
-        
+
         self.__df_pasajeros = pd.concat([self.__df_pasajeros, pd.DataFrame([nuevo_pasajero])], ignore_index=True)
         print(f"El pasajero {nombre} con documento {documento_identidad} se ha agregado correctamente.")
 
