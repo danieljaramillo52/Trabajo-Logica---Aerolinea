@@ -82,3 +82,139 @@
 2024-11-26 13:28:15.072 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
 2024-11-26 13:28:39.206 | INFO     | ModuloPasajeros:_leer_info_pasajeros:52 - Leyendo información de pasajeros desde el archivo configurado...
 2024-11-26 13:28:39.251 | INFO     | ModuloPasajeros:_leer_info_pasajeros:55 - Información de pasajeros cargada correctamente.
+2024-11-26 13:43:32.747 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 13:43:32.747961
+2024-11-26 13:43:32.771 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 13:43:44.579 | INFO     | ModuloPasajeros:_leer_info_pasajeros:52 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 13:43:44.611 | INFO     | ModuloPasajeros:_leer_info_pasajeros:55 - Información de pasajeros cargada correctamente.
+2024-11-26 13:55:39.292 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 13:55:39.292235
+2024-11-26 13:55:39.305 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 13:55:48.357 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 13:55:48.375 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 15:04:26.271 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:04:26.271476
+2024-11-26 15:04:26.283 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:04:33.374 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 15:04:33.396 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 15:11:31.090 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:11:31.090936
+2024-11-26 15:11:31.114 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:11:36.817 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 15:12:07.846 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:12:07.846560
+2024-11-26 15:12:07.865 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:12:12.479 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 15:12:12.524 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 15:14:18.445 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:14:18.445608
+2024-11-26 15:14:18.477 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:14:24.648 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 15:14:24.687 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 15:24:57.318 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:24:57.318279
+2024-11-26 15:24:57.333 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:24:59.753 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 15:24:59.794 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 15:47:23.111 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:47:23.111067
+2024-11-26 15:47:23.124 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:47:26.788 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 15:47:26.812 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 15:49:06.563 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:49:06.563866
+2024-11-26 15:49:06.584 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:49:09.648 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 15:49:09.667 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 15:51:55.054 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:51:55.054368
+2024-11-26 15:51:55.070 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:52:00.511 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 15:52:00.535 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 15:58:07.793 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:58:07.793532
+2024-11-26 15:58:07.825 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:59:47.425 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 15:59:47.425096
+2024-11-26 15:59:47.439 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 15:59:51.291 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 15:59:51.334 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 16:04:03.276 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 16:04:03.276885
+2024-11-26 16:04:03.292 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 16:15:06.739 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 16:15:06.739567
+2024-11-26 16:15:06.753 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 16:23:57.797 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 16:23:57.797501
+2024-11-26 16:23:57.816 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 16:26:15.361 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 16:26:15.361222
+2024-11-26 16:26:15.377 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:01:55.419 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:01:55.419492
+2024-11-26 17:01:55.477 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:07:22.396 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 17:07:22.468 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 17:12:26.781 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:12:26.781372
+2024-11-26 17:12:26.805 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:12:32.928 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 17:12:32.947 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 17:43:08.507 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:43:08.507312
+2024-11-26 17:43:08.526 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:43:12.195 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 17:43:12.214 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 17:51:23.123 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:51:23.123420
+2024-11-26 17:51:23.167 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:51:25.536 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 17:51:25.555 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 17:52:23.563 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:52:23.563281
+2024-11-26 17:52:23.579 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:52:52.821 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:52:52.821788
+2024-11-26 17:52:52.848 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:52:55.838 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 17:52:55.858 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 17:55:56.867 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:55:56.867678
+2024-11-26 17:55:56.887 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:55:58.499 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 17:55:58.517 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 17:57:27.278 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:57:27.278821
+2024-11-26 17:57:27.294 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:57:28.835 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 17:57:28.854 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:04:57.935 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:04:57.935021
+2024-11-26 18:04:57.963 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:05:00.034 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:05:00.052 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:09:43.471 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:09:43.471172
+2024-11-26 18:09:43.483 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:09:46.677 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:09:46.692 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:11:52.206 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:11:52.206532
+2024-11-26 18:11:52.242 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:11:55.247 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:11:55.266 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:12:39.183 | INFO     | transformation_functions:concatenate_dataframes:104 - DataFrames concatenados exitosamente.
+2024-11-26 18:18:43.924 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:18:43.924096
+2024-11-26 18:18:43.949 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:18:47.494 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:18:47.515 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:22:53.949 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:22:53.949111
+2024-11-26 18:22:53.979 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:22:56.782 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:22:56.804 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:28:15.120 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:28:15.120186
+2024-11-26 18:28:15.144 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:28:17.777 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:28:17.779 | ERROR    | general_functions:Lectura_simple_excel:199 - Proceso de lectura fallido: [Errno 13] Permission denied: 'Insumos/empleados.xlsx'
+2024-11-26 18:28:30.903 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:28:30.903081
+2024-11-26 18:28:30.916 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:28:37.366 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:28:37.413 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:31:56.793 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:31:56.793583
+2024-11-26 18:31:56.807 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:32:02.621 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:32:02.639 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:36:23.238 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:36:23.238349
+2024-11-26 18:36:23.252 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:36:25.209 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:36:25.229 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:39:13.408 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:39:13.408352
+2024-11-26 18:39:13.427 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:39:16.158 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:39:16.176 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:42:14.600 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:42:14.600422
+2024-11-26 18:42:14.621 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:42:19.274 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:42:19.294 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:45:22.656 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:45:22.656038
+2024-11-26 18:45:22.673 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:45:24.646 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:45:24.665 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
+2024-11-26 18:46:00.587 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:46:00.587277
+2024-11-26 18:46:00.600 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:46:02.337 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 18:46:02.356 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.

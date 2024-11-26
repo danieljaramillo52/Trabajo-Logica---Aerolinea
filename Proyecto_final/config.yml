@@ -164,12 +164,12 @@ directorio_pasajeros:
   nom_base: "pasajeros_sin_asiento.xlsx"
   nom_hoja: "sheet1"
   dict_cols: 
-    "nombre": "Nombre"
-    "documento_identidad": "Documento_Identidad"
-    "edad": "Edad"
-    "equipaje": "Equipaje"
-    "vuelo": "Vuelo"
-    "estado_reserva": "Estado_Reserva"
+    "nombre": "nombre"
+    "documento_identidad": "documento_identidad"
+    "edad": "edad"
+    "equipaje": "equipaje"
+    "vuelo": "vuelo"
+    "estado_reserva": "estado_reserva"
 
 directorio_empleados: 
   nom_base: "empleados.xlsx"
@@ -181,7 +181,7 @@ directorio_empleados:
     "Documento_Licencia": "Documento_Licencia"
     "Horas_Vuelo": "Horas_Vuelo"
     "Estado_Empleado": "Estado_Empleado"
-    "Estado_Empleado": "Estado_Empleado"
+    "Correo_Electronico": "Correo_Electronico"
     "Disponible": "Disponible"
     "Ubicacion": "Ubicacion"   
   

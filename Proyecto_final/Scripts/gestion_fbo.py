@@ -50,14 +50,11 @@ class GestionFBO:
         self.gestionar_ciclo(hangar)
 
     def _gestionar_empleado(self, menu: dict):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        empleados = Empleados(self.config, menu, matricula)
+        empleados = Empleados(config=self.config, menu=menu)
         self.gestionar_ciclo(empleados)
 
-    def _gestionar_tripulacion(self, menu: dict):
-        
-        empleados_admin = Empleados(self.config)
-        
+    def _gestionar_tripulacion(self, menu: dict):        
+        empleados_admin = Empleados(self.config)        
         admin = AdminTripulacion(self.config,  menu, empleados_admin)
         self.gestionar_ciclo(admin)
         
