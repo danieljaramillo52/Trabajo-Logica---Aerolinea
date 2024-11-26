@@ -8,6 +8,7 @@ from AvionHangares import Avion, Hangar
 from Scripts.ModuloEmpleado import Empleados, Empleado
 from Pasajero import Pasajero
 from typing import Dict
+from random import randint
 
 
 class GestionFBO:
@@ -45,43 +46,107 @@ class GestionFBO:
 
     def _gestionar_hangar(self, menu: dict):
         #matricula = input("Ingrese una matricula de la lista a consultar: ")
-        hangar = Hangar(self.config(), menu, PBT)
+        hangar = Hangar(self.config, menu, PBT)
         self.gestionar_ciclo(hangar)
 
     def _gestionar_empleado(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        empleados = Empleados(self.config(), menu, matricula)
+        empleados = Empleados(self.config, menu, matricula)
         self.gestionar_ciclo(empleados)
 
     def _gestionar_tripulacion(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config(), menu, matricula)
+        avion = Avion(self.config, menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _gestionar_mantenimiento(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config(), menu, matricula)
+        avion = Avion(self.config, menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _gestionar_servicios(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config(), menu, matricula)
+        avion = Avion(self.config, menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _gestionar_vuelo(self, menu: dict):
         matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config(), menu, matricula)
+        avion = Avion(self.config, menu, matricula)
         self.gestionar_ciclo(avion)
 
     def _gestionar_pasajero(self, menu: dict):
-        pasajero = Pasajero(self.config(), menu)
+        pasajero = Pasajero(self.config, menu)
         self.gestionar_ciclo(pasajero)
+    
 
-    def _gestionar_avion(self, menu):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config(), menu, matricula)
+    def _gestionar_avion(self, menu: dict):
+        """
+        Gestiona la creación de una instancia de la clase Avion y su posterior manejo.
+
+        Args:
+            menu (dict): Un diccionario con la configuración del menú.
+
+        """
+        num_avion = self._generar_numero_aleatorio()
+        datos_avion = self._obtener_datos_avion(num_avion)
+        avion = self._crear_instancia_avion(datos_avion, menu)
+        self._gestionar_ciclo_avion(avion)
+
+
+    def _generar_numero_aleatorio(self) -> int:
+        """
+        Genera un número aleatorio entre 1 y 10.
+
+        Returns:
+            int: Número aleatorio generado.
+        """
+        from random import randint
+        return randint(1, 10)
+
+
+    def _obtener_datos_avion(self, num_avion: int) -> dict:
+        """
+        Obtiene los datos del avión a partir del número aleatorio generado.
+
+        Args:
+            num_avion (int): Número aleatorio generado.
+
+        Returns:
+            dict: Datos del avión, si existen en la configuración; de lo contrario, un diccionario vacío.
+        """
+        return self.config["directorio_aviones"]["aviones_ingresar"][num_avion]
+
+
+    def _crear_instancia_avion(self, datos_avion: dict, menu: dict):
+        """
+        Crea una instancia de la clase Avion a partir de los datos proporcionados.
+
+        Args:
+            datos_avion (dict): Diccionario con los datos del avión.
+            menu (dict): Configuración del menú.
+
+        Returns:
+            Avion: Instancia creada de la clase Avion.
+        """
+        if datos_avion:
+            print("Instancia del avión creada:", datos_avion["matricula"])
+            return Avion(config=self.config, menu_avion=menu, **datos_avion)
+        else:
+            print("No se encontraron datos para el avión. Creando instancia por defecto.")
+            return Avion(config=self.config, menu_avion=menu)
+
+
+    def _gestionar_ciclo_avion(self, avion):
+        """
+        Maneja la lógica adicional para la instancia del avión creado.
+
+        Args:
+            avion (Avion): Instancia de la clase Avion creada.
+        """
+        # Aquí llamamos al método gestionar_ciclo con el avión creado
         self.gestionar_ciclo(avion)
 
+        
     def _menu_principal(self, dict_menus: dict):
         """
         Muestra el menú principal y permite al usuario seleccionar una opción.
@@ -144,7 +209,7 @@ class GenerarMenusFBO:
         :param gestion_fbo: Instancia de la clase GestionFBO para acceder a la configuración.
         """
         self.__gestion_fbo = gestion_fbo
-        self.__config = self.__gestion_fbo.config()
+        self.__config = self.__gestion_fbo.config
 
         # Acceso directo a las claves necesarias
         self.__direc_menu = self.__config["directorio_menu"]

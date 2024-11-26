@@ -3,7 +3,9 @@ from typing import List
 from loguru import logger
 import general_functions as gf
 import pandas as pd
+import numpy as np
 from loguru import logger
+from random import randint
 
 
 class Hangar:
@@ -39,7 +41,7 @@ class Hangar:
             raise ValueError("El valor de df_aviones debe ser un DataFrame.")
         self.__df_aviones = value
 
-    # Propiedad para la configuración    
+    # Propiedad para la configuración
     @property
     def config(self):
         return self.__config
@@ -100,7 +102,7 @@ class Hangar:
             list_columns=self.obtener_columnas_disponibles(),
             type_data=float,
         )
-        
+
     def ejecutar_proceso_hangar(self, opcion: str) -> bool:
         """
         Ejecuta la opción seleccionada por el usuario.
@@ -110,18 +112,19 @@ class Hangar:
 
         Returns:
             bool: True si debe continuar, False si debe detenerse.
-        """  
-        self.df_aviones = self.tranformar_tipos_data() 
-        
+        """
+        self.df_aviones = self.tranformar_tipos_data()
+
         opciones = {
             "1": self._generar_reporte_estado_general,
             "2": self._filtrar_por_operacion_elegida,
             "3": self._resumen_por_tipo,
-            "4": self._agregar_avion_al_hangar,
-            "5": self._eliminar_avion_hangar,
+            "4": self._agregar_avion,
+            "5": self._depurar_hangar,
+            "6": self._eliminar_avion_hangar,
             "0": lambda: False,  # Salir del menú
         }
-        
+
         return gf.procesar_opcion(opcion=opcion, opciones=opciones)
 
     def _calcular_totales(self, df):
@@ -157,7 +160,9 @@ class Hangar:
         """
         total_aviones = totales["Total aviones en hangar"]
         porcentaje_disponibles = (totales["Número disponibles"] / total_aviones) * 100
-        porcentaje_mantenimiento = (totales["Número necesitan mantenimiento"] / total_aviones) * 100
+        porcentaje_mantenimiento = (
+            totales["Número necesitan mantenimiento"] / total_aviones
+        ) * 100
 
         return {
             "Porcentaje disponibles (%)": porcentaje_disponibles,
@@ -223,7 +228,9 @@ class Hangar:
         reporte = {**totales, **porcentajes, **estadisticas_horas, **capacidad_y_peso}
 
         # Crear DataFrame para el reporte
-        reporte_df = pd.DataFrame.from_dict(data=reporte, orient="index", columns=["valor"])
+        reporte_df = pd.DataFrame.from_dict(
+            data=reporte, orient="index", columns=["valor"]
+        )
 
         # Mostrar el reporte en consola
         print(f"\nReporte Ampliado del Estado General del Hangar\n{'='*50}")
@@ -231,7 +238,6 @@ class Hangar:
         print(f"{'='*50}\n")
 
         return reporte_df
-
 
     def obtener_config_operaciones(self):
         """
@@ -362,7 +368,7 @@ class Hangar:
         print(f"\n{mensaje_resultados} '{columna}'")
         print(f"Operación: {operacion}")
         print(df_filtrado[list_col])
-        
+
         return df_filtrado[list_col]
 
     def exportar_filtrado(self, df):
@@ -398,7 +404,7 @@ class Hangar:
             columnas_disponibles[columna_idx], operacion, df_filtrado
         )
         self.exportar_filtrado(df=df_select)
-    
+
     def _resumen_por_tipo(self) -> pd.DataFrame:
         """
         Genera un resumen agrupado por el tipo de avión.
@@ -420,46 +426,274 @@ class Hangar:
         print(resumen)
         return resumen
 
-    def _agregar_avion_al_hangar():
-        pass
+    def _agregar_avion(self):
+        """
+        Agrega un avión al DataFrame del hangar.
+
+        Args:
+            avion (Avion): Instancia de la clase Avion que será añadida.
+        """
+        dict_data_nuevos_aviones = self.config["directorio_aviones"][
+            "aviones_ingresar"
+        ][randint(1, 10)]
+
+        avion = Avion(config=self.config, menu_avion=None, **dict_data_nuevos_aviones)
+
+        # Convertir los atributos del avión a un formato adecuado
+        valores = avion.atributos_a_numpy_array()
+
+        # Crear una nueva fila como DataFrame
+        nueva_fila = pd.DataFrame([valores], columns=self.df_aviones.columns)
+
+        # Agregar la nueva fila al DataFrame existente
+        self.df_aviones = pd.concat([self.df_aviones, nueva_fila], ignore_index=True)
+
+        print(f"El avión con matrícula {avion.matricula} ha sido agregado al hangar.")
     
-    def _eliminar_avion_hangar():
-        pass
+    
+    def _depurar_hangar(self):
+        """
+        Elimina aviones duplicados del DataFrame del hangar, manteniendo la coincidencia más reciente.
+
+        Este método utiliza la funcionalidad de eliminación de duplicados de pandas para 
+        asegurarse de que no haya registros duplicados de aviones en el hangar. 
+        Solo se conserva la última aparición de cada avión según su matrícula u otros identificadores.
+
+        Returns:
+            pd.DataFrame: El DataFrame del hangar depurado, sin aviones duplicados.
+        """
+        logger.info("Hangar depurado correctamente. ")
+        self.df_aviones = self.df_aviones.drop_duplicates(keep="last")
+        return self.df_aviones
+
+    
+    def _eliminar_avion_hangar(self):
+        """
+        Elimina un avión del DataFrame del hangar según la matrícula proporcionada.
+
+        Este método solicita al usuario una matrícula específica para identificar y eliminar un avión del DataFrame. La eliminación se realiza creando un nuevo DataFrame que excluye el avión con la matrícula indicada. Luego, se actualiza el DataFrame original del hangar.
+
+        Returns:
+            pd.DataFrame: El DataFrame actualizado después de eliminar el avión.
+        """
         
-class Avion:
-    def __init__(self, __config, __menu_avion=None, matricula=None):
-        """
-        Inicializa una instancia de Avion para operar sobre un DataFrame existente.
-        Puede utilizar la matrícula para buscar un avión específico o trabajar con el DataFrame completo.
-
-        :param __config: Configuración con las columnas y otras opciones necesarias.
-        :param __menu_avion: Menú relacionado con las opciones de avión.
-        :param matricula: Matrícula del avión específico (opcional).
-        """
-        self.__menu_avion = __menu_avion
-        self.__config = __config
-        self.__eleccion = self.__config["Menu"]["menu_opcion"]["1"]
-        self.cols_direct = self.__config["directorio_aviones"]["dict_cols"]
-
-        # Obtener el DataFrame de aviones desde Hangar
-        self.__hangar_data = Hangar(self.__config)
-        self.__df_info_hangar = self.__hangar_data.df_aviones
-
-        if matricula:
-            self.matricula = matricula
-            self.avion_data = self.__df_info_hangar[
-                self.__df_info_hangar[self.cols_direct["matricula"]] == matricula
+        matricula = input("Ingrese una matricula de un avión para eliminar: \n")
+        
+        self.df_aviones_mod = self.df_aviones[
+                self.cols_df_avion["matricula"] != matricula
             ]
-        else:
-            self.matricula = None
-            self.avion_data = None
+
+        self.df_aviones = self.df_aviones_mod
+
+        logger.info("Avion eliminado correctamente")
+        
+        return self.df_aviones
+
+
+class Avion:
+    """
+    Clase que representa un avión con sus características y comportamientos asociados.
+
+    Esta clase encapsula los atributos de un avión, como matrícula, tipo, modelo, fabricante,
+    propietario, y otros detalles operativos, proporcionando métodos para interactuar con
+    estos atributos. Incluye validaciones mediante propiedades (`property`) para asegurar
+    que los valores asignados sean válidos.
+
+    Attributes:
+        config (dict): Configuración general para el avión.
+        matricula (str): Matrícula única del avión.
+        tipo (str): Tipo del avión (por ejemplo, Carga, Pasajeros, etc.).
+        modelo (str): Modelo del avión.
+        fabricante (str): Nombre del fabricante del avión.
+        propietario (str): Nombre del propietario del avión.
+        horas_vuelo (int | float): Total de horas de vuelo acumuladas.
+        capacidad_pasajeros (int): Número máximo de pasajeros.
+        peso_maximo_carga (int | float): Peso máximo de carga permitida (kg).
+        disponible (str): Estado de disponibilidad ("VERDADERO" o "FALSO").
+        horas_ultimo_mantenimiento (int | float): Horas desde el último mantenimiento.
+        necesita_mantenimiento (str): Indica si el avión requiere mantenimiento ("VERDADERO" o "FALSO").
+    """
+
+    def __init__(
+        self,
+        config,
+        matricula,
+        tipo,
+        modelo,
+        fabricante,
+        propietario,
+        horas_vuelo,
+        capacidad_pasajeros,
+        peso_maximo_carga,
+        disponible,
+        horas_ultimo_mantenimiento,
+        necesita_mantenimiento,
+        menu_avion=None,
+    ):
+        self.__config = config
+        self.__menu_avion = menu_avion
+        self.__matricula = matricula
+        self.__tipo = tipo
+        self.__modelo = modelo
+        self.__fabricante = fabricante
+        self.__propietario = propietario
+        self.__horas_vuelo = horas_vuelo
+        self.__capacidad_pasajeros = capacidad_pasajeros
+        self.__peso_maximo_carga = peso_maximo_carga
+        self.__disponible = disponible
+        self.__horas_ultimo_mantenimiento = horas_ultimo_mantenimiento
+        self.__necesita_mantenimiento = necesita_mantenimiento
+
+    @property
+    def config(self):
+        return self.__config
+
+    @config.setter
+    def config(self, value):
+        self.config = value
+    
+    @property
+    def matricula(self):
+        return self.__matricula
+
+    @matricula.setter
+    def matricula(self, value):
+        if not isinstance(value, str):
+            raise ValueError("La matrícula debe ser una cadena.")
+        self.__matricula = value
+
+    @property
+    def tipo(self):
+        return self.__tipo
+
+    @tipo.setter
+    def tipo(self, value):
+        if not isinstance(value, str):
+            raise ValueError("El tipo debe ser una cadena.")
+        self.__tipo = value
+
+    @property
+    def modelo(self):
+        return self.__modelo
+
+    @modelo.setter
+    def modelo(self, value):
+        if not isinstance(value, str):
+            raise ValueError("El modelo debe ser una cadena.")
+        self.__modelo = value
+
+    @property
+    def fabricante(self):
+        return self.__fabricante
+
+    @fabricante.setter
+    def fabricante(self, value):
+        if not isinstance(value, str):
+            raise ValueError("El fabricante debe ser una cadena.")
+        self.__fabricante = value
+
+    @property
+    def propietario(self):
+        return self.__propietario
+
+    @propietario.setter
+    def propietario(self, value):
+        if not isinstance(value, str):
+            raise ValueError("El propietario debe ser una cadena.")
+        self.__propietario = value
+
+    @property
+    def horas_vuelo(self):
+        return self.__horas_vuelo
+
+    @horas_vuelo.setter
+    def horas_vuelo(self, value):
+        if not isinstance(value, (int, float)) or value < 0:
+            raise ValueError("Las horas de vuelo deben ser un número positivo.")
+        self.__horas_vuelo = value
+
+    @property
+    def capacidad_pasajeros(self):
+        return self.__capacidad_pasajeros
+
+    @capacidad_pasajeros.setter
+    def capacidad_pasajeros(self, value):
+        if not isinstance(value, int) or value < 0:
+            raise ValueError("La capacidad de pasajeros debe ser un entero positivo.")
+        self.__capacidad_pasajeros = value
+
+    @property
+    def peso_maximo_carga(self):
+        return self.__peso_maximo_carga
+
+    @peso_maximo_carga.setter
+    def peso_maximo_carga(self, value):
+        if not isinstance(value, (int, float)) or value < 0:
+            raise ValueError("El peso máximo de carga debe ser un número positivo.")
+        self.__peso_maximo_carga = value
+
+    @property
+    def disponible(self):
+        return self.__disponible
+
+    @disponible.setter
+    def disponible(self, value):
+        if value not in ["VERDADERO", "FALSO"]:
+            raise ValueError("Disponible debe ser 'VERDADERO' o 'FALSO'.")
+        self._disponible = value
+
+    @property
+    def horas_ultimo_mantenimiento(self):
+        return self.__horas_ultimo_mantenimiento
+
+    @horas_ultimo_mantenimiento.setter
+    def horas_ultimo_mantenimiento(self, value):
+        if not isinstance(value, (int, float)) or value < 0:
+            raise ValueError(
+                "Las horas desde el último mantenimiento deben ser un número positivo."
+            )
+        self.__horas_ultimo_mantenimiento = value
+
+    @property
+    def necesita_mantenimiento(self):
+        return self.__necesita_mantenimiento
+
+    @necesita_mantenimiento.setter
+    def necesita_mantenimiento(self, value):
+        if value not in ["VERDADERO", "FALSO"]:
+            raise ValueError("Necesita mantenimiento debe ser 'VERDADERO' o 'FALSO'.")
+        self.__necesita_mantenimiento = value
+
+    def atributos_a_numpy_array(self) -> np.ndarray:
+        """
+        Convierte los atributos públicos del avión en un arreglo unidimensional de NumPy.
+
+        Este método utiliza introspección para acceder dinámicamente a los atributos de la
+        instancia. Filtra los atributos excluyendo aquellos que comienzan con '_', ya que
+        se consideran privados, y luego extrae sus valores usando la función `getattr`.
+
+        Los pasos principales son:
+            1. Obtener todos los atributos de la instancia usando `vars(self)`.
+            2. Filtrar los atributos que no comienzan con '_'.
+            3. Extraer los valores de los atributos filtrados con `getattr`.
+            4. Convertir los valores a un arreglo unidimensional de NumPy con `dtype=object`.
+
+        Returns:
+            np.ndarray: Arreglo unidimensional que contiene los valores de los atributos
+            públicos del avión.
+        """
+
+        return np.array(
+            [getattr(self, attr) for attr in vars(self) if not attr.startswith("_")],
+            dtype=object,
+        )
 
     def mostrar_menu(self):
-        eleccion = self.__eleccion
+        eleccion = self.config["Menu"]["menu_opcion"]["1"]
         gf.mostrar_menu_personalizado(eleccion, self.__menu_avion)
 
     def ejecutar_proceso(self):
-        opcion_ingresada = input("\n Ingresa la opción a ejecutar: \n\n ")
+        opcion_ingresada = input("\n Ingresa la opción a ejecutar: ")
         resultado = self.ejecutar_proceso_avion(opcion_ingresada)
         return resultado
 
@@ -472,100 +706,114 @@ class Avion:
         """
         opciones = {
             "1": self.obtener_informacion_avion,
-            "2": self._actualizar_horas_vuelo,
-            "3": self.realizar_mantenimiento,
-            "4": lambda: print(Avion.aviones_necesitan_mantenimiento(self.df_info_avi)),
-            "5": lambda: print(Avion.aviones_disponibles(self.df_info_avi)),
+            "2": self.actualizar_horas_vuelo(horas=int(input("Ingrese el número de horas de vuelo a actualizar."))),
+            "3": self.verificar_disponibilidad,
+            "4": self,
+            "5": self,
             "0": lambda: False,  # Salir del menú
         }
         resultado = gf.procesar_opcion(opcion=opcion, opciones=opciones)
 
         return resultado
 
-    def obtener_informacion_avion(self):
+    def atributos_a_numpy_array(self) -> np.ndarray:
         """
-        Devuelve la información completa de un avión específico según su matrícula.
-        """
-        if self.avion_data is not None:
-            return print(self.avion_data)
-        else:
-            return "No se ha especificado una matrícula o el avión no existe en el DataFrame."
+        Convierte los atributos públicos del avión en un arreglo unidimensional de NumPy.
 
-    def _actualizar_horas_vuelo(self, horas):
+        Returns:
+            np.ndarray: Arreglo unidimensional con los valores de los atributos públicos.
         """
-        Actualiza las horas de vuelo de un avión específico.
-
-        :param horas: Número de horas de vuelo para actualizar.
-        """
-        if self.avion_data is not None:
-            self.df_info_avi.loc[
-                self.df_info_avi[self.cols_direct["matricula"]] == self.matricula,
-                "horas_vuelo",
-            ] += horas
-            print(
-                f"Horas de vuelo actualizadas para el avión con matrícula {self.matricula}."
-            )
-        else:
-            print(
-                "No se ha especificado una matrícula o el avión no existe en el DataFrame."
-            )
-
-    def realizar_mantenimiento(self):
-        """
-        Marca el avión como mantenido, actualizando las horas desde el último mantenimiento a 0.
-        """
-        if self.avion_data is not None:
-            self.df_info_avi.loc[
-                self.df_info_avi[self.cols_direct["matricula"]] == self.matricula,
-                "horas_ultimo_mantenimiento",
-            ] = 0
-            self.df_info_avi.loc[
-                self.df_info_avi[self.cols_direct["matricula"]] == self.matricula,
-                "necesita_mantenimiento",
-            ] = False
-        else:
-            print(
-                "No se ha especificado una matrícula o el avión no existe en el DataFrame."
-            )
-
-    @staticmethod
-    def aviones_necesitan_mantenimiento(df):
-        """
-        Devuelve un DataFrame con los aviones que necesitan mantenimiento.
-
-        :param df: DataFrame que contiene la información de los aviones.
-        :return: DataFrame filtrado con los aviones que necesitan mantenimiento.
-        """
-        return df[df["necesita_mantenimiento"] == True]
-
-    @staticmethod
-    def aviones_disponibles(df):
-        """
-        Devuelve un DataFrame con los aviones disponibles.
-
-        :param df: DataFrame que contiene la información de los aviones.
-        :return: DataFrame filtrado con los aviones disponibles.
-        """
-        return df[df["disponible"] == True]
-
-    def verificar_mantenimiento(self):
-        return self.avion_data["necesita_mantenimiento"].iloc[0] or (
-            self.avion_data["horas_vuelo"].iloc[0]
-            - self.avion_data["horas_ultimo_mantenimiento"].iloc[0]
-            >= 400
+        return np.array(
+            [getattr(self, attr) for attr in vars(self) if not attr.startswith("_")],
+            dtype=object,
         )
 
+    def actualizar_horas_vuelo(self, horas: float):
+        if not isinstance(horas, (int, float)) or horas < 0:
+            raise ValueError("Las horas deben ser un número positivo.")
+        self.horas_vuelo += horas
+        print(f"Horas de vuelo actualizadas. Total actual: {self.horas_vuelo}")
 
+    def verificar_mantenimiento(self) -> bool:
+        necesita = self.necesita_mantenimiento == "VERDADERO" or (
+            self.horas_vuelo - self.horas_ultimo_mantenimiento >= 400
+        )
+        print(
+            f"El avión {self._matricula} {'necesita' if necesita else 'no necesita'} mantenimiento."
+        )
+        return necesita
+
+    def obtener_informacion_avion(self) -> dict:
+        info = {
+            "Matrícula": self._matricula,
+            "Tipo": self._tipo,
+            "Modelo": self._modelo,
+            "Fabricante": self._fabricante,
+            "Propietario": self._propietario,
+            "Horas de vuelo": self._horas_vuelo,
+            "Capacidad de pasajeros": self._capacidad_pasajeros,
+            "Peso máximo de carga (kg)": self._peso_maximo_carga,
+            "Disponible": self._disponible,
+            "Horas desde último mantenimiento": self._horas_ultimo_mantenimiento,
+            "Necesita mantenimiento": self._necesita_mantenimiento,
+        }
+        print("Información detallada del avión:")
+        for key, value in info.items():
+            print(f"{key}: {value}")
+        return info
+
+    def verificar_disponibilidad(self) -> bool:
+        disponible = self.disponible == "VERDADERO"
+        print(
+            f"El avión {self.matricula} {'está disponible' if disponible else 'no está disponible'}."
+        )
+        return disponible
+
+   
 class Mantenimiento:
     def __init__(self, __config, __menu_mantenimiento=None):
+        """
+        Constructor de la clase Mantenimiento.
+
+        Args:
+            __config (dict): Diccionario de configuración del sistema.
+            __menu_mantenimiento (opcional): Configuración del menú relacionado con mantenimiento.
+        """
         self.__config = __config
         self.__menu_mantenimiento = __menu_mantenimiento
+        self.df_mantenimiento = self.cargar_datos_mantenimiento()
+
+    def cargar_datos_mantenimiento(self):
+        """
+        Carga los datos de mantenimiento en un DataFrame.
+
+        Returns:
+            pd.DataFrame: DataFrame con la información de mantenimiento.
+        """
+        # Este es un ejemplo inicial, reemplazarlo con datos reales según sea necesario.
+        data = {
+            "Matrícula": ["ABC001", "ABC003", "ABC005", "ABC007"],
+            "Tipo": ["Privado", "Privado", "Privado", "Privado"],
+            "Modelo": ["Airbus A320", "Gulfstream G550", "Embraer Phenom 300", "Boeing 737"],
+            "Horas Vuelo": [2000, 1500, 3000, 4000],
+            "Estado de Mantenimiento": ["Pendiente", "Pendiente", "Completo", "Pendiente"],
+            "Costo Mantenimiento Mínimo (USD)": [4000, 3600, 5600, 6400],
+            "Costo Mantenimiento Completo (USD)": [5000, 4500, 7000, 8000],
+            "Costo Mantenimiento Lujo (USD)": [10000, 9000, 14000, 16000],
+        }
+        return pd.DataFrame(data)
 
     def mostrar_menu(self):
+        """
+        Muestra el menú de mantenimiento.
+        """
         eleccion = self.__config["Menu"]["menu_opcion"][8]
-        gf.mostrar_menu_personalizado(eleccion, self.__menu_empleado)
+        gf.mostrar_menu_personalizado(eleccion, self.__menu_mantenimiento)
 
     def ejecutar_proceso(self):
+        """
+        Ejecuta el proceso principal del menú de mantenimiento.
+        """
         opcion_ingresada = input("Ingresa la opción a ejecutar:\n ")
         resultado = self.ejecutar_proceso_pasajero(opcion_ingresada)
         return resultado
@@ -574,27 +822,64 @@ class Mantenimiento:
         """
         Ejecuta la opción seleccionada por el usuario y devuelve si debe continuar gestionando procesos.
 
-        :param opcion: Opción seleccionada por el usuario.
-        :return: True si se desea continuar, False si se regresa al menú principal.
+        Args:
+            opcion (str): Opción seleccionada.
+
+        Returns:
+            bool: True si se desea continuar, False si se regresa al menú principal.
         """
         opciones = {
-            "1": self.metodo1,
-            "2": self.metodo2,
-            "3": self.realizar_mantenimiento,
-            "4": 1,
-            "5": 2,
-            "0": 3,
+            "1": self.mostrar_datos_mantenimiento,
+            "2": self.filtrar_por_estado,
+            "3": self.calcular_costos_por_tipo,
+            "4": self.actualizar_estado_mantenimiento,
+            "0": lambda: False,  # Salir del menú
         }
         if opcion in opciones:
             if opcion == "0":  # Opción para salir directamente
                 return False
             else:
                 resultado = opciones[opcion]()
-                print("Proceso terminado. \n")
+                print("Proceso terminado.\n")
                 return True
 
-    def metodo1():
-        pass
+    def mostrar_datos_mantenimiento(self):
+        """
+        Muestra todos los datos de mantenimiento en el DataFrame.
+        """
+        print("\nDatos de Mantenimiento:")
+        print(self.df_mantenimiento)
 
-    def metodo2():
-        pass
+    def filtrar_por_estado(self):
+        """
+        Filtra los aviones por estado de mantenimiento y muestra el resultado.
+        """
+        estado = input("\nIngrese el estado de mantenimiento a filtrar (Pendiente/Completo): ")
+        filtrado = self.df_mantenimiento[self.df_mantenimiento["Estado de Mantenimiento"] == estado]
+        if filtrado.empty:
+            print(f"No se encontraron aviones con estado '{estado}'.")
+        else:
+            print(f"\nAviones con estado de mantenimiento '{estado}':")
+            print(filtrado)
+
+    def calcular_costos_por_tipo(self):
+        """
+        Calcula el costo total de mantenimiento por tipo de avión.
+        """
+        costos_por_tipo = self.df_mantenimiento.groupby("Tipo")[["Costo Mantenimiento Completo (USD)"]].sum()
+        print("\nCostos de mantenimiento por tipo de avión:")
+        print(costos_por_tipo)
+
+    def actualizar_estado_mantenimiento(self):
+        """
+        Actualiza el estado de mantenimiento de un avión.
+        """
+        matricula = input("\nIngrese la matrícula del avión para actualizar el estado de mantenimiento: ")
+        nuevo_estado = input("Ingrese el nuevo estado de mantenimiento (Pendiente/Completo): ")
+
+        if matricula in self.df_mantenimiento["Matrícula"].values:
+            self.df_mantenimiento.loc[self.df_mantenimiento["Matrícula"] == matricula, "Estado de Mantenimiento"] = nuevo_estado
+            print(f"El estado de mantenimiento del avión con matrícula {matricula} ha sido actualizado a '{nuevo_estado}'.")
+        else:
+            print(f"No se encontró un avión con la matrícula {matricula}.")
+
