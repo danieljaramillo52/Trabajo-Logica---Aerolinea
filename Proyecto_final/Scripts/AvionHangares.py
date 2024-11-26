@@ -122,10 +122,16 @@ class Hangar:
             "4": self._agregar_avion,
             "5": self._depurar_hangar,
             "6": self._eliminar_avion_hangar,
+            "7": self._exportar_hangar,
             "0": lambda: False,  # Salir del menú
         }
 
         return gf.procesar_opcion(opcion=opcion, opciones=opciones)
+
+    def _exportar_hangar(self):
+        """Exporta el hangar de aviones luego de los cambios.}"""
+        hangar_expotar = self.df_aviones
+        hangar_expotar.to_excel("Resultados/aviones_compania_final.xlsx", index=False)
 
     def _calcular_totales(self, df):
         """
@@ -449,14 +455,13 @@ class Hangar:
         self.df_aviones = pd.concat([self.df_aviones, nueva_fila], ignore_index=True)
 
         print(f"El avión con matrícula {avion.matricula} ha sido agregado al hangar.")
-    
-    
+
     def _depurar_hangar(self):
         """
         Elimina aviones duplicados del DataFrame del hangar, manteniendo la coincidencia más reciente.
 
-        Este método utiliza la funcionalidad de eliminación de duplicados de pandas para 
-        asegurarse de que no haya registros duplicados de aviones en el hangar. 
+        Este método utiliza la funcionalidad de eliminación de duplicados de pandas para
+        asegurarse de que no haya registros duplicados de aviones en el hangar.
         Solo se conserva la última aparición de cada avión según su matrícula u otros identificadores.
 
         Returns:
@@ -466,7 +471,6 @@ class Hangar:
         self.df_aviones = self.df_aviones.drop_duplicates(keep="last")
         return self.df_aviones
 
-    
     def _eliminar_avion_hangar(self):
         """
         Elimina un avión del DataFrame del hangar según la matrícula proporcionada.
@@ -476,17 +480,17 @@ class Hangar:
         Returns:
             pd.DataFrame: El DataFrame actualizado después de eliminar el avión.
         """
-        
+
         matricula = input("Ingrese una matricula de un avión para eliminar: \n")
-        
+
         self.df_aviones_mod = self.df_aviones[
-                self.cols_df_avion["matricula"] != matricula
-            ]
+            self.cols_df_avion["matricula"] != matricula
+        ]
 
         self.df_aviones = self.df_aviones_mod
 
         logger.info("Avion eliminado correctamente")
-        
+
         return self.df_aviones
 
 
@@ -551,7 +555,7 @@ class Avion:
     @config.setter
     def config(self, value):
         self.config = value
-    
+
     @property
     def matricula(self):
         return self.__matricula
@@ -706,7 +710,9 @@ class Avion:
         """
         opciones = {
             "1": self.obtener_informacion_avion,
-            "2": self.actualizar_horas_vuelo(horas=int(input("Ingrese el número de horas de vuelo a actualizar."))),
+            "2": self.actualizar_horas_vuelo(
+                horas=int(input("Ingrese el número de horas de vuelo a actualizar."))
+            ),
             "3": self.verificar_disponibilidad,
             "4": self,
             "5": self,
@@ -769,7 +775,7 @@ class Avion:
         )
         return disponible
 
-   
+
 class Mantenimiento:
     def __init__(self, __config, __menu_mantenimiento=None):
         """
@@ -794,9 +800,19 @@ class Mantenimiento:
         data = {
             "Matrícula": ["ABC001", "ABC003", "ABC005", "ABC007"],
             "Tipo": ["Privado", "Privado", "Privado", "Privado"],
-            "Modelo": ["Airbus A320", "Gulfstream G550", "Embraer Phenom 300", "Boeing 737"],
+            "Modelo": [
+                "Airbus A320",
+                "Gulfstream G550",
+                "Embraer Phenom 300",
+                "Boeing 737",
+            ],
             "Horas Vuelo": [2000, 1500, 3000, 4000],
-            "Estado de Mantenimiento": ["Pendiente", "Pendiente", "Completo", "Pendiente"],
+            "Estado de Mantenimiento": [
+                "Pendiente",
+                "Pendiente",
+                "Completo",
+                "Pendiente",
+            ],
             "Costo Mantenimiento Mínimo (USD)": [4000, 3600, 5600, 6400],
             "Costo Mantenimiento Completo (USD)": [5000, 4500, 7000, 8000],
             "Costo Mantenimiento Lujo (USD)": [10000, 9000, 14000, 16000],
@@ -854,8 +870,12 @@ class Mantenimiento:
         """
         Filtra los aviones por estado de mantenimiento y muestra el resultado.
         """
-        estado = input("\nIngrese el estado de mantenimiento a filtrar (Pendiente/Completo): ")
-        filtrado = self.df_mantenimiento[self.df_mantenimiento["Estado de Mantenimiento"] == estado]
+        estado = input(
+            "\nIngrese el estado de mantenimiento a filtrar (Pendiente/Completo): "
+        )
+        filtrado = self.df_mantenimiento[
+            self.df_mantenimiento["Estado de Mantenimiento"] == estado
+        ]
         if filtrado.empty:
             print(f"No se encontraron aviones con estado '{estado}'.")
         else:
@@ -866,7 +886,9 @@ class Mantenimiento:
         """
         Calcula el costo total de mantenimiento por tipo de avión.
         """
-        costos_por_tipo = self.df_mantenimiento.groupby("Tipo")[["Costo Mantenimiento Completo (USD)"]].sum()
+        costos_por_tipo = self.df_mantenimiento.groupby("Tipo")[
+            ["Costo Mantenimiento Completo (USD)"]
+        ].sum()
         print("\nCostos de mantenimiento por tipo de avión:")
         print(costos_por_tipo)
 
@@ -874,12 +896,20 @@ class Mantenimiento:
         """
         Actualiza el estado de mantenimiento de un avión.
         """
-        matricula = input("\nIngrese la matrícula del avión para actualizar el estado de mantenimiento: ")
-        nuevo_estado = input("Ingrese el nuevo estado de mantenimiento (Pendiente/Completo): ")
+        matricula = input(
+            "\nIngrese la matrícula del avión para actualizar el estado de mantenimiento: "
+        )
+        nuevo_estado = input(
+            "Ingrese el nuevo estado de mantenimiento (Pendiente/Completo): "
+        )
 
         if matricula in self.df_mantenimiento["Matrícula"].values:
-            self.df_mantenimiento.loc[self.df_mantenimiento["Matrícula"] == matricula, "Estado de Mantenimiento"] = nuevo_estado
-            print(f"El estado de mantenimiento del avión con matrícula {matricula} ha sido actualizado a '{nuevo_estado}'.")
+            self.df_mantenimiento.loc[
+                self.df_mantenimiento["Matrícula"] == matricula,
+                "Estado de Mantenimiento",
+            ] = nuevo_estado
+            print(
+                f"El estado de mantenimiento del avión con matrícula {matricula} ha sido actualizado a '{nuevo_estado}'."
+            )
         else:
             print(f"No se encontró un avión con la matrícula {matricula}.")
-

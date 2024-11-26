@@ -6,24 +6,47 @@ from  transformation_functions import PandasBaseTransformer as PBT
 import general_functions as gf
 
 RUTA_EXCEL_PASAJEROS = "Insumos/pasajeros.xlsx"
-"""
-directorio_pasajeros: 
-  nom_base: "pasajeros_sin_asiento.xlsx"
-  nom_hoja: "Directorio_Pasajeros"
-  dict_cols: 
-    "nombre": "Nombre"
-    "documento_identidad": "Documento_Identidad"
-    "edad": "Edad"
-    "equipaje": "Equipaje"
-    "vuelo": "Vuelo"
-    "estado_reserva": "Estado_Reserva"
-"""
 
 class Pasajeros:
-    def __init__(self, config):
+    def __init__(self, menu, config):
         self.__config = config
+        self.__menu_pasajero = menu
         self._cols_df_pasajeros = self.__config["directorio_pasajeros"]["dict_cols"]
         self.__df_pasajeros = self._leer_info_pasajeros()
+        
+    def mostrar_menu(self):
+        """Muestra el menú personalizado."""
+        eleccion = self.__config["Menu"]["menu_opcion"]["8"]
+        gf.mostrar_menu_personalizado(eleccion, self.__menu_pasajero)
+
+    def ejecutar_proceso(self):
+        """
+        Ejecuta el proceso basado en la opción ingresada por el usuario.
+
+        Returns:
+            bool: Resultado del proceso ejecutado.
+        """
+        opcion_ingresada = input("Ingresa la opción a ejecutar: ")
+        return self.ejecutar_proceso_pasajero(opcion_ingresada)
+
+    def ejecutar_proceso_pasajero(self, opcion: str) -> bool:
+        """
+        Ejecuta la opción seleccionada por el usuario.
+
+        Args:
+            opcion (str): Opción seleccionada.
+
+        Returns:
+            bool: True si debe continuar, False si debe detenerse.
+        """
+        opciones = {
+            "1": self.informacion_pasajero,
+            "2": self.agregar_pasajero,
+            "3": self.actualizar_datos_pasajero,
+            "0": lambda: False,  # Salir del menú
+        }
+
+        return gf.procesar_opcion(opcion=opcion, opciones=opciones)
 
     def _leer_info_pasajeros(self) -> pd.DataFrame:
         logger.info("Leyendo información de pasajeros desde el archivo configurado...")
@@ -143,58 +166,4 @@ class Pasajeros:
 
         print(f"Reserva del pasajero con documento {documento_identidad} actualizada correctamente.")
         self.guardar_cambios()
-
-    class Pasajero:
-        def __init__(self, nombre, documento_identidad, edad, equipaje, vuelo, estado_reserva):
-            self.__nombre = nombre
-            self.__documento_identidad = documento_identidad
-            self.__edad = edad
-            self.__equipaje = equipaje
-            self.__vuelo = vuelo
-            self.__estado_reserva = estado_reserva
-
-        def calcular_peso_total_equipaje(self):
-            """
-            Devuelve el peso del equipaje del pasajero.
-            """
-            return self.__equipaje
-
-        def actualizar_datos(self, nombre=None, documento_identidad=None, edad=None):
-            """
-            Actualiza los datos del pasajero.
-            """
-            if nombre:
-                self.__nombre = nombre
-            if documento_identidad:
-                self.__documento_identidad = documento_identidad
-            if edad:
-                self.__edad = edad
-
-        def actualizar_equipaje(self, equipaje):
-            """
-            Actualiza el peso del equipaje del pasajero.
-            """
-            self.__equipaje = equipaje
-
-        def actualizar_reserva(self, vuelo=None, estado_reserva=None):
-            """
-            Actualiza la información de la reserva del pasajero.
-            """
-            if vuelo:
-                self.__vuelo = vuelo
-            if estado_reserva:
-                self.__estado_reserva = estado_reserva
-
-        def pasajero_to_dict(self):
-            """
-            Devuelve los datos del pasajero como un diccionario.
-            """
-            return {
-                "nombre": self.__nombre,
-                "documento_identidad": self.__documento_identidad,
-                "edad": self.__edad,
-                "equipaje": self.__equipaje,
-                "vuelo": self.__vuelo,
-                "estado_reserva": self.__estado_reserva,
-            }
 
