@@ -2,6 +2,8 @@ import config_path_routes
 import general_functions as gf
 from loguru import logger
 from transformation_functions import PandasBaseTransformer as PBT
+from Scripts.ModuloVuelo import Vuelo
+from Servicios import Servicios
 from AvionHangares import Avion, Hangar
 from Scripts.ModuloEmpleado import Empleados, Empleado
 from Pasajero import Pasajero
