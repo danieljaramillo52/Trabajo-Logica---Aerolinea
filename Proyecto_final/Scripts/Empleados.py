@@ -1,7 +1,9 @@
 from datetime import datetime
 from typing import List
 from loguru import logger
+import pandas as pd
 import general_functions as gf
+from transformation_functions import PandasBaseTransformer as PBT
 
 config = {
     "path_insumos": "Insumos/",
@@ -21,6 +23,23 @@ config = {
             "disponible": "disponible",
             "horas_ultimo_mantenimiento": "horas_ultimo_mantenimiento",
             "necesita_mantenimiento": "necesita_mantenimiento"
+        }
+    },
+
+    "directorio_empleados": {
+        "nom_base": "empleados.xlsx",
+        "nom_hoja": "Directorio_Empleados",
+        "dict_cols": {
+            "Nombre": "Nombre",
+            "id_empleado": "ID_Empleado",
+            "rol": "Rol",
+            "documento_licencia": "Documento_Licencia",
+            "horas_vuelo": "Horas_Vuelo",
+            "estado_empleado": "Estado_Empleado",
+            "certificaciones": "Certificaciones",
+            "correo_electronico": "Correo_Electronico",
+            "disponible": "Disponible",
+            "ubicacion": "Ubicacion",
         }
     },
     
@@ -82,45 +101,33 @@ config = {
 
 class Empleados:
 
-    def __init__(self, config, __menu_hangar=None, __PBT=None):
-        """Constructor de clse
-
-        Args:
-            __config (dict): Diccionario de configuración del proyecto
-            __PBT (class) : Clase que contiene métodos para la manipulación de la fuente de infromación de Aviones
-        Returns:
-            _type_: _description_
-        """
+    def __init__(self, config, __menu_empleados=None, __PBT=None):
         self.__config = config
-        self.__menu_empleados = __menu_hangar
+        self.__menu_empleados = __menu_empleados
         self.__PBT = __PBT
         self.__cols_df_empleados = self.__config["directorio_empleados"]["dict_cols"]
         self.__df_empleados = self._leer_info_empleado()
         
 
     def mostrar_menu(self):
-        eleccion = self.__config["Menu"]["menu_opcion"][1]
+        eleccion = self.__config["Menu"]["menu_opcion"][3]
         gf.mostrar_menu_personalizado(eleccion,self.__menu_empleados)    
     
     def _leer_info_empleados(self) -> dict:
-        """
-        Lee los datos de los aviones desde el archivo Excel configurado.
-        :return: DataFrame con la información de los aviones.
-        """
-        logger.info("Leyendo información de aviones desde el archivo configurado...")
+        logger.info("Leyendo información de empleados desde el archivo configurado...")
         lector_insumo = gf.ExcelReader(path=self.__config["path_insumos"])
         df_info_empleados = lector_insumo.Lectura_simple_excel(
-            nom_insumo=self.__config["directorio_aviones"]["nom_base"],
-            nom_hoja=self.__config["directorio_aviones"]["nom_hoja"],
+            nom_insumo=self.__config["directorio_empleados"]["nom_base"],
+            nom_hoja=self.__config["directorio_empleados"]["nom_hoja"],
         )
-        logger.info("Información de aviones cargada correctamente.")
+        logger.info("Información de empleados cargada correctamente.")
         print("")
         return df_info_empleados  
     
     def get_empleados(self):
         """
-        Proporciona el DataFrame con los datos de los aviones.
-        :return: DataFrame de aviones.
+        Proporciona el DataFrame con los datos de los empleados.
+        :return: DataFrame de empleados.
         """
         return self.__df_empleados
      
@@ -131,8 +138,43 @@ class Empleados:
     
     def administrar_empleados(self):
         df_select = self.__PBT.Seleccionar_columnas_pd(
-            df=self.__df_aviones, cols_elegidas=[*self.__cols_df_avion]
-        )  
+            df=self.__df_empleados, cols_elegidas=[*self.__cols_df_empleados]
+        )
+
+    def empleado_to_dict(self):
+        return {
+            "Nombre": self.nombre,
+            "ID Empleado": self.id_empleado,
+            "Rol": self.rol,
+            "Documento Licencia": self.documento_licencia,
+            "Horas Vuelo": self.horas_vuelo,
+            "Estado": self.estado_empleado,
+            "Certificaciones": self.certificaciones,
+            "Correo Electronico": self.correo_electronico,
+            "Disponible": self.disponible,
+            "Ubicacion": self.ubicacion
+        }
+
+    def agregar_empleado(self):
+        nombre = input("Ingrese el nombre del nuevo empleado")
+        id_empleado = input("Ingrese el id del empleado")
+        rol = input("Ingrese el rol a desempeñar")
+        documento_licencia = input("Ingrese el documento o licencia")
+        horas_vuelo = input("Ingrese las horas de vuelo certificadas")
+        estado_empleado = "Activo"
+        certificaciones = []
+        correo_electronico = input("Ingrese el correo electronico")
+        disponible_para_vuelo = {
+            "Disponible": input("ingrese FALSO o VERDADERO"),
+            "Ubicacion": input("Ingrese la ubicacion del empleado")
+        }
+        nuevo_empleado = Empleado(nombre, id_empleado, rol, documento_licencia, horas_vuelo, 
+                                   estado_empleado, certificaciones, correo_electronico, 
+                                  disponible_para_vuelo["Disponible", "Ubicacion"])
+        dict_nuevo_empleado = nuevo_empleado.empleado_to_dict()
+        df_nuevo_empleado = pd.DataFrame.from_dict(dict_nuevo_empleado)
+        df_actualizado = PBT.concatenate_dataframes(self.__df_empleados, df_nuevo_empleado)
+        return (df_actualizado.to_excel("Insumos/empleados.xlsx", index=False))
         
 
 class Empleado:
@@ -167,3 +209,8 @@ class Empleado:
 
     def actualizar_estado_empleado(self, estado):
         self.__estado_empleado = estado
+
+
+empleados = Empleados(config, {}, {})
+
+empleados.__df_empleados._leer_info_empleados()
