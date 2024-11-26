@@ -82,3 +82,66 @@
 2024-11-26 13:28:15.072 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
 2024-11-26 13:28:39.206 | INFO     | ModuloPasajeros:_leer_info_pasajeros:52 - Leyendo información de pasajeros desde el archivo configurado...
 2024-11-26 13:28:39.251 | INFO     | ModuloPasajeros:_leer_info_pasajeros:55 - Información de pasajeros cargada correctamente.
+2024-11-26 17:49:33.596 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:49:33.596617
+2024-11-26 17:49:33.619 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:53:33.587 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:53:33.586993
+2024-11-26 17:53:33.599 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:55:17.761 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:55:17.761893
+2024-11-26 17:55:17.775 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:55:33.625 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 17:55:33.625823
+2024-11-26 17:55:33.637 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 17:55:37.686 | INFO     | ModuloPasajeros:_leer_info_pasajeros:52 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 17:55:37.712 | INFO     | ModuloPasajeros:_leer_info_pasajeros:55 - Información de pasajeros cargada correctamente.
+2024-11-26 18:00:25.041 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:00:25.041117
+2024-11-26 18:00:25.054 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:03:08.364 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:03:08.364090
+2024-11-26 18:03:08.376 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:09:38.098 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:09:38.098910
+2024-11-26 18:09:38.119 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:14:24.215 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:14:24.215709
+2024-11-26 18:14:24.228 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:17:41.437 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:17:41.437411
+2024-11-26 18:17:41.450 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:18:37.301 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:18:37.301261
+2024-11-26 18:18:37.313 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:19:30.125 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:19:30.125645
+2024-11-26 18:19:30.139 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:21:10.262 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:21:10.262904
+2024-11-26 18:21:10.276 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:22:52.071 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:22:52.071369
+2024-11-26 18:22:52.086 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:23:28.077 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:23:28.077610
+2024-11-26 18:23:28.090 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:30:13.338 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:30:13.338790
+2024-11-26 18:30:13.351 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:43:02.863 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:43:02.863221
+2024-11-26 18:43:02.876 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:43:06.611 | ERROR    | ModuloServicios:cargar_servicios_desde_excel:38 - Error al cargar los servicios desde el archivo Excel: too many values to unpack (expected 2)
+2024-11-26 18:43:19.936 | INFO     | ModuloServicios:verificar_servicio:103 - Servicio verificado correctamente.
+2024-11-26 18:45:37.589 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:45:37.589876
+2024-11-26 18:45:37.603 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:45:40.772 | ERROR    | ModuloServicios:cargar_servicios_desde_excel:38 - Error al cargar los servicios desde el archivo Excel: too many values to unpack (expected 2)
+2024-11-26 18:45:51.111 | INFO     | ModuloServicios:asignar_servicio:114 - Servicio 'Catering' asignado correctamente. Costo actualizado: 2000.0.
+2024-11-26 18:46:58.937 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:46:58.937089
+2024-11-26 18:46:58.950 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:47:00.684 | ERROR    | ModuloServicios:cargar_servicios_desde_excel:38 - Error al cargar los servicios desde el archivo Excel: too many values to unpack (expected 2)
+2024-11-26 18:49:29.968 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:49:29.968471
+2024-11-26 18:49:29.986 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:49:32.690 | ERROR    | ModuloServicios:cargar_servicios_desde_excel:37 - Error al cargar los servicios desde el archivo Excel: too many values to unpack (expected 2)
+2024-11-26 18:49:42.370 | INFO     | ModuloServicios:asignar_servicio:111 - Servicio 'Catering' asignado correctamente. Costo actualizado: [200.0].
+2024-11-26 18:49:52.686 | INFO     | ModuloServicios:asignar_servicio:111 - Servicio 'VIP' asignado correctamente. Costo actualizado: [200.0, 100.0].
+2024-11-26 18:50:25.679 | INFO     | ModuloServicios:eliminar_servicio:121 - Servicio 'Catering' eliminado correctamente.
+2024-11-26 18:51:04.359 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:51:04.359364
+2024-11-26 18:51:04.373 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:51:06.579 | ERROR    | ModuloServicios:cargar_servicios_desde_excel:37 - Error al cargar los servicios desde el archivo Excel: too many values to unpack (expected 2)
+2024-11-26 18:51:48.903 | INFO     | ModuloServicios:asignar_servicio:111 - Servicio 'vip' asignado correctamente. Costo actualizado: [200.0].
+2024-11-26 18:53:58.624 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:53:58.624622
+2024-11-26 18:53:58.637 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:54:01.010 | ERROR    | ModuloServicios:cargar_servicios_desde_excel:37 - Error al cargar los servicios desde el archivo Excel: too many values to unpack (expected 2)
+2024-11-26 18:54:28.369 | INFO     | ModuloServicios:asignar_servicio:113 - Servicio '5' asignado correctamente. Costo actualizado: [200.0].
+2024-11-26 18:54:29.941 | INFO     | ModuloServicios:generar_reporte_servicios:154 - Reporte de servicios generado exitosamente.
+2024-11-26 18:54:44.919 | INFO     | ModuloServicios:verificar_servicio:101 - Servicio verificado correctamente.
+2024-11-26 18:54:58.892 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 18:54:58.892716
+2024-11-26 18:54:58.909 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 18:55:13.104 | INFO     | ModuloVuelo:listar_pasajeros:107 - No hay pasajeros asignados a este vuelo.
+2024-11-26 18:55:16.375 | INFO     | ModuloVuelo:calcular_peso_total_equipaje:62 - Peso total del equipaje calculado: 0 kg

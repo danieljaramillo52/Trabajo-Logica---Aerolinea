@@ -135,7 +135,7 @@ class Hangar:
 
     def _calcular_totales(self, df):
         """
-        Calcula los totales de aviones, disponibles y en mantenimiento.
+        Calcula los totales de aviones disponibles.
 
         Args:
             df (pd.DataFrame): DataFrame con los datos de los aviones.
@@ -146,17 +146,15 @@ class Hangar:
         cols = self.cols_df_avion
         total_aviones = len(df)
         num_disponibles = len(df[df[cols["disponible"]] == "VERDADERO"])
-        num_mantenimiento = len(df[df[cols["necesita_mantenimiento"]] == "VERDADERO"])
 
         return {
             "Total aviones en hangar": total_aviones,
             "Número disponibles": num_disponibles,
-            "Número necesitan mantenimiento": num_mantenimiento,
         }
 
     def _calcular_porcentajes(self, totales):
         """
-        Calcula los porcentajes de aviones disponibles y en mantenimiento.
+        Calcula los porcentajes de aviones disponibles.
 
         Args:
             totales (dict): Totales calculados previamente.
@@ -166,13 +164,9 @@ class Hangar:
         """
         total_aviones = totales["Total aviones en hangar"]
         porcentaje_disponibles = (totales["Número disponibles"] / total_aviones) * 100
-        porcentaje_mantenimiento = (
-            totales["Número necesitan mantenimiento"] / total_aviones
-        ) * 100
 
         return {
-            "Porcentaje disponibles (%)": porcentaje_disponibles,
-            "Porcentaje necesitan mantenimiento (%)": porcentaje_mantenimiento,
+            "Porcentaje disponibles (%)": porcentaje_disponibles
         }
 
     def _calcular_estadisticas_horas(self, df):
@@ -514,8 +508,6 @@ class Avion:
         capacidad_pasajeros (int): Número máximo de pasajeros.
         peso_maximo_carga (int | float): Peso máximo de carga permitida (kg).
         disponible (str): Estado de disponibilidad ("VERDADERO" o "FALSO").
-        horas_ultimo_mantenimiento (int | float): Horas desde el último mantenimiento.
-        necesita_mantenimiento (str): Indica si el avión requiere mantenimiento ("VERDADERO" o "FALSO").
     """
 
     def __init__(
@@ -530,8 +522,6 @@ class Avion:
         capacidad_pasajeros,
         peso_maximo_carga,
         disponible,
-        horas_ultimo_mantenimiento,
-        necesita_mantenimiento,
         menu_avion=None,
     ):
         self.__config = config
@@ -545,8 +535,6 @@ class Avion:
         self.__capacidad_pasajeros = capacidad_pasajeros
         self.__peso_maximo_carga = peso_maximo_carga
         self.__disponible = disponible
-        self.__horas_ultimo_mantenimiento = horas_ultimo_mantenimiento
-        self.__necesita_mantenimiento = necesita_mantenimiento
 
     @property
     def config(self):
@@ -646,28 +634,6 @@ class Avion:
             raise ValueError("Disponible debe ser 'VERDADERO' o 'FALSO'.")
         self._disponible = value
 
-    @property
-    def horas_ultimo_mantenimiento(self):
-        return self.__horas_ultimo_mantenimiento
-
-    @horas_ultimo_mantenimiento.setter
-    def horas_ultimo_mantenimiento(self, value):
-        if not isinstance(value, (int, float)) or value < 0:
-            raise ValueError(
-                "Las horas desde el último mantenimiento deben ser un número positivo."
-            )
-        self.__horas_ultimo_mantenimiento = value
-
-    @property
-    def necesita_mantenimiento(self):
-        return self.__necesita_mantenimiento
-
-    @necesita_mantenimiento.setter
-    def necesita_mantenimiento(self, value):
-        if value not in ["VERDADERO", "FALSO"]:
-            raise ValueError("Necesita mantenimiento debe ser 'VERDADERO' o 'FALSO'.")
-        self.__necesita_mantenimiento = value
-
     def atributos_a_numpy_array(self) -> np.ndarray:
         """
         Convierte los atributos públicos del avión en un arreglo unidimensional de NumPy.
@@ -722,32 +688,11 @@ class Avion:
 
         return resultado
 
-    def atributos_a_numpy_array(self) -> np.ndarray:
-        """
-        Convierte los atributos públicos del avión en un arreglo unidimensional de NumPy.
-
-        Returns:
-            np.ndarray: Arreglo unidimensional con los valores de los atributos públicos.
-        """
-        return np.array(
-            [getattr(self, attr) for attr in vars(self) if not attr.startswith("_")],
-            dtype=object,
-        )
-
     def actualizar_horas_vuelo(self, horas: float):
         if not isinstance(horas, (int, float)) or horas < 0:
             raise ValueError("Las horas deben ser un número positivo.")
         self.horas_vuelo += horas
         print(f"Horas de vuelo actualizadas. Total actual: {self.horas_vuelo}")
-
-    def verificar_mantenimiento(self) -> bool:
-        necesita = self.necesita_mantenimiento == "VERDADERO" or (
-            self.horas_vuelo - self.horas_ultimo_mantenimiento >= 400
-        )
-        print(
-            f"El avión {self._matricula} {'necesita' if necesita else 'no necesita'} mantenimiento."
-        )
-        return necesita
 
     def obtener_informacion_avion(self) -> dict:
         info = {
@@ -760,8 +705,6 @@ class Avion:
             "Capacidad de pasajeros": self._capacidad_pasajeros,
             "Peso máximo de carga (kg)": self._peso_maximo_carga,
             "Disponible": self._disponible,
-            "Horas desde último mantenimiento": self._horas_ultimo_mantenimiento,
-            "Necesita mantenimiento": self._necesita_mantenimiento,
         }
         print("Información detallada del avión:")
         for key, value in info.items():
@@ -774,142 +717,3 @@ class Avion:
             f"El avión {self.matricula} {'está disponible' if disponible else 'no está disponible'}."
         )
         return disponible
-
-
-class Mantenimiento:
-    def __init__(self, __config, __menu_mantenimiento=None):
-        """
-        Constructor de la clase Mantenimiento.
-
-        Args:
-            __config (dict): Diccionario de configuración del sistema.
-            __menu_mantenimiento (opcional): Configuración del menú relacionado con mantenimiento.
-        """
-        self.__config = __config
-        self.__menu_mantenimiento = __menu_mantenimiento
-        self.df_mantenimiento = self.cargar_datos_mantenimiento()
-
-    def cargar_datos_mantenimiento(self):
-        """
-        Carga los datos de mantenimiento en un DataFrame.
-
-        Returns:
-            pd.DataFrame: DataFrame con la información de mantenimiento.
-        """
-        # Este es un ejemplo inicial, reemplazarlo con datos reales según sea necesario.
-        data = {
-            "Matrícula": ["ABC001", "ABC003", "ABC005", "ABC007"],
-            "Tipo": ["Privado", "Privado", "Privado", "Privado"],
-            "Modelo": [
-                "Airbus A320",
-                "Gulfstream G550",
-                "Embraer Phenom 300",
-                "Boeing 737",
-            ],
-            "Horas Vuelo": [2000, 1500, 3000, 4000],
-            "Estado de Mantenimiento": [
-                "Pendiente",
-                "Pendiente",
-                "Completo",
-                "Pendiente",
-            ],
-            "Costo Mantenimiento Mínimo (USD)": [4000, 3600, 5600, 6400],
-            "Costo Mantenimiento Completo (USD)": [5000, 4500, 7000, 8000],
-            "Costo Mantenimiento Lujo (USD)": [10000, 9000, 14000, 16000],
-        }
-        return pd.DataFrame(data)
-
-    def mostrar_menu(self):
-        """
-        Muestra el menú de mantenimiento.
-        """
-        eleccion = self.__config["Menu"]["menu_opcion"][8]
-        gf.mostrar_menu_personalizado(eleccion, self.__menu_mantenimiento)
-
-    def ejecutar_proceso(self):
-        """
-        Ejecuta el proceso principal del menú de mantenimiento.
-        """
-        opcion_ingresada = input("Ingresa la opción a ejecutar:\n ")
-        resultado = self.ejecutar_proceso_pasajero(opcion_ingresada)
-        return resultado
-
-    def ejecutar_proceso_pasajero(self, opcion: str) -> bool:
-        """
-        Ejecuta la opción seleccionada por el usuario y devuelve si debe continuar gestionando procesos.
-
-        Args:
-            opcion (str): Opción seleccionada.
-
-        Returns:
-            bool: True si se desea continuar, False si se regresa al menú principal.
-        """
-        opciones = {
-            "1": self.mostrar_datos_mantenimiento,
-            "2": self.filtrar_por_estado,
-            "3": self.calcular_costos_por_tipo,
-            "4": self.actualizar_estado_mantenimiento,
-            "0": lambda: False,  # Salir del menú
-        }
-        if opcion in opciones:
-            if opcion == "0":  # Opción para salir directamente
-                return False
-            else:
-                resultado = opciones[opcion]()
-                print("Proceso terminado.\n")
-                return True
-
-    def mostrar_datos_mantenimiento(self):
-        """
-        Muestra todos los datos de mantenimiento en el DataFrame.
-        """
-        print("\nDatos de Mantenimiento:")
-        print(self.df_mantenimiento)
-
-    def filtrar_por_estado(self):
-        """
-        Filtra los aviones por estado de mantenimiento y muestra el resultado.
-        """
-        estado = input(
-            "\nIngrese el estado de mantenimiento a filtrar (Pendiente/Completo): "
-        )
-        filtrado = self.df_mantenimiento[
-            self.df_mantenimiento["Estado de Mantenimiento"] == estado
-        ]
-        if filtrado.empty:
-            print(f"No se encontraron aviones con estado '{estado}'.")
-        else:
-            print(f"\nAviones con estado de mantenimiento '{estado}':")
-            print(filtrado)
-
-    def calcular_costos_por_tipo(self):
-        """
-        Calcula el costo total de mantenimiento por tipo de avión.
-        """
-        costos_por_tipo = self.df_mantenimiento.groupby("Tipo")[
-            ["Costo Mantenimiento Completo (USD)"]
-        ].sum()
-        print("\nCostos de mantenimiento por tipo de avión:")
-        print(costos_por_tipo)
-
-    def actualizar_estado_mantenimiento(self):
-        """
-        Actualiza el estado de mantenimiento de un avión.
-        """
-        matricula = input(
-            "\nIngrese la matrícula del avión para actualizar el estado de mantenimiento: "
-        )
-        nuevo_estado = input(
-            "Ingrese el nuevo estado de mantenimiento (Pendiente/Completo): "
-        )
-
-        if matricula in self.df_mantenimiento["Matrícula"].values:
-            self.df_mantenimiento.loc[
-                self.df_mantenimiento["Matrícula"] == matricula,
-                "Estado de Mantenimiento",
-            ] = nuevo_estado
-            print(
-                f"El estado de mantenimiento del avión con matrícula {matricula} ha sido actualizado a '{nuevo_estado}'."
-            )
-        else:
-            print(f"No se encontró un avión con la matrícula {matricula}.")
