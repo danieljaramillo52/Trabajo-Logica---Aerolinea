@@ -161,19 +161,13 @@ class Mantenimiento:
 
 class Pasajero:
 
-    def __init__(self, nombre, documento_identidad, edad, tipo, peso, vuelo, numero_asiento, estado_reserva):
+    def __init__(self, nombre, documento_identidad, edad, peso, vuelo, numero_asiento, estado_reserva):
         self.__nombre = nombre
         self.__documento_identidad = documento_identidad
         self.__edad = edad
-        self.__equipaje = {
-            "Tipo": tipo,
-            "Peso": peso
-        }
-        self.__reserva = {
-            "Vuelo": vuelo,
-            "Numero_asiento": numero_asiento,
-            "Estado_reserva": estado_reserva
-        }
+        self.__equipaje = peso
+        self.__vuelo = vuelo
+        self.__estado_reserva = estado_reserva
 
     def calcular_peso_total_equipaje(self):
         return self.__equipaje["Peso"]
@@ -186,14 +180,13 @@ class Pasajero:
         if edad:
             self.__edad = edad
 
-    def actualizar_equipaje(self, tipo, peso):
-        self.__equipaje["Tipo"] = tipo
-        self.__equipaje["Peso"] = peso
+    def actualizar_equipaje(self, peso):
+        self.__equipaje = peso
 
     def actualizar_reserva(self, vuelo, numero_asiento, estado_reserva):
-        self.__reserva["Vuelo"] = vuelo
-        self.__reserva["Numero_asiento"] = numero_asiento
-        self.__reserva["Estado_reserva"] = estado_reserva
+        self.__vuelo = vuelo
+        self.__numero_asiento = numero_asiento
+        self.__estado_reserva = estado_reserva
 
 
 class Tripulacion:

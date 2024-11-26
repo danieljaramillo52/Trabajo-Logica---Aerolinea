@@ -352,3 +352,13 @@
 
 2024-11-22 20:37:04.586 | INFO     | general_functions:exportar_a_excel:64 - Exportando a excel: Reporte
 2024-11-22 20:39:48.216 | INFO     | gestion_fbo:_menu_principal:102 - Saliendo del menú principal...
+2024-11-24 22:15:14.551 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-24 22:15:14.551382
+2024-11-24 22:15:14.580 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-24 22:16:05.758 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-24 22:16:05.758408
+2024-11-24 22:16:05.779 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-24 22:17:02.776 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-24 22:17:02.776900
+2024-11-24 22:17:02.788 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-24 22:17:58.661 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-24 22:17:58.661822
+2024-11-24 22:17:58.668 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 15:01:51.577 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 15:01:51.576533
+2024-11-25 15:01:51.586 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
