@@ -352,3 +352,59 @@
 
 2024-11-22 20:37:04.586 | INFO     | general_functions:exportar_a_excel:64 - Exportando a excel: Reporte
 2024-11-22 20:39:48.216 | INFO     | gestion_fbo:_menu_principal:102 - Saliendo del menú principal...
+2024-11-25 10:29:09.997 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 10:29:09.997982
+2024-11-25 10:29:17.270 | CRITICAL | general_functions:Procesar_configuracion:144 - Proceso de lectura de configuración fallido while parsing a block mapping
+  in "config.yml", line 41, column 5
+expected <block end>, but found ','
+  in "config.yml", line 53, column 6
+2024-11-25 17:43:20.214 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 17:43:20.214995
+2024-11-25 17:43:36.067 | CRITICAL | general_functions:Procesar_configuracion:144 - Proceso de lectura de configuración fallido while parsing a block mapping
+  in "config.yml", line 41, column 5
+expected <block end>, but found ','
+  in "config.yml", line 53, column 6
+2024-11-25 17:44:16.180 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 17:44:16.180043
+2024-11-25 17:44:43.570 | CRITICAL | general_functions:Procesar_configuracion:144 - Proceso de lectura de configuración fallido while parsing a block mapping
+  in "config.yml", line 41, column 5
+expected <block end>, but found ','
+  in "config.yml", line 53, column 6
+2024-11-25 17:47:04.893 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 17:47:04.893184
+2024-11-25 17:47:08.734 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 17:48:41.044 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 17:48:41.044923
+2024-11-25 17:48:47.905 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 17:51:51.223 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 17:51:51.223073
+2024-11-25 17:51:51.317 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 17:53:37.689 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 17:53:37.689144
+2024-11-25 17:53:37.764 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:09:52.479 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:09:52.479082
+2024-11-25 18:09:52.553 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:10:27.848 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:10:27.848708
+2024-11-25 18:10:27.919 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:10:47.514 | INFO     | AvionHangares:_leer_info_avion:69 - Leyendo información de aviones
+2024-11-25 18:10:47.594 | INFO     | AvionHangares:_leer_info_avion:78 - Información de aviones cargada correctamente.
+
+2024-11-25 18:10:59.316 | INFO     | general_functions:exportar_a_excel:64 - Exportando a excel: Reporte
+2024-11-25 18:11:51.808 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:11:51.808726
+2024-11-25 18:11:51.882 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:14:33.640 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:14:33.640518
+2024-11-25 18:14:33.724 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:16:52.740 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:16:52.740677
+2024-11-25 18:16:52.825 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:17:21.688 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:17:21.688783
+2024-11-25 18:17:21.776 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:17:24.207 | INFO     | AvionHangares:_leer_info_avion:69 - Leyendo información de aviones
+2024-11-25 18:17:24.279 | INFO     | AvionHangares:_leer_info_avion:78 - Información de aviones cargada correctamente.
+
+2024-11-25 18:17:46.840 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:17:46.840840
+2024-11-25 18:17:46.915 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:19:03.372 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:19:03.372961
+2024-11-25 18:19:03.473 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:22:32.544 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:22:32.543362
+2024-11-25 18:22:32.622 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:27:09.542 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:27:09.542209
+2024-11-25 18:27:09.617 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:31:26.682 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:31:26.682266
+2024-11-25 18:31:26.749 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:32:56.623 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:32:56.623799
+2024-11-25 18:32:56.698 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-25 18:33:23.504 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-25 18:33:23.504313
+2024-11-25 18:33:23.596 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio

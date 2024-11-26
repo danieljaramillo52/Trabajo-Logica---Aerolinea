@@ -37,6 +37,130 @@ directorio_aviones:
       ingrese_valor_max: "Ingrese el valor máximo:"
       ingrese_umbral: "Ingrese el valor umbral:"
       resultados_filtro: "Resultados del filtro en la columna:"
+  aviones_ingresar:
+   1:
+     matricula: "DEF002"
+     tipo: "Ambulancia Aérea"
+     modelo: "Boeing 747"
+     fabricante: "Boeing"
+     propietario: "Owner 5"
+     horas_vuelo: 12563
+     capacidad_pasajeros: 10
+     peso_maximo_carga: 450
+     disponible: "FALSO"
+     horas_ultimo_mantenimiento: 132
+     necesita_mantenimiento: "VERDADERO"
+   2:
+     matricula: "GHI004"
+     tipo: "Privado"
+     modelo: "Learjet 75"
+     fabricante: "Bombardier"
+     propietario: "Owner 2"
+     horas_vuelo: 4521
+     capacidad_pasajeros: 8
+     peso_maximo_carga: 190
+     disponible: "VERDADERO"
+     horas_ultimo_mantenimiento: 350
+     necesita_mantenimiento: "FALSO"
+   3:
+     matricula: "JKL005"
+     tipo: "Carga"
+     modelo: "Antonov An-225"
+     fabricante: "Antonov"
+     propietario: "Owner 6"
+     horas_vuelo: 9623
+     capacidad_pasajeros: 0
+     peso_maximo_carga: 2500
+     disponible: "VERDADERO"
+     horas_ultimo_mantenimiento: 200
+     necesita_mantenimiento: "FALSO"
+   4:
+     matricula: "MNO006"
+     tipo: "Vuelo Privado"
+     modelo: "Cessna Citation X"
+     fabricante: "Cessna"
+     propietario: "Owner 4"
+     horas_vuelo: 3702
+     capacidad_pasajeros: 12
+     peso_maximo_carga: 250
+     disponible: "FALSO"
+     horas_ultimo_mantenimiento: 180
+     necesita_mantenimiento: "VERDADERO"
+   5:
+     matricula: "PQR007"
+     tipo: "Fumigación"
+     modelo: "Air Tractor AT-802"
+     fabricante: "Air Tractor"
+     propietario: "Owner 7"
+     horas_vuelo: 1543
+     capacidad_pasajeros: 0
+     peso_maximo_carga: 100
+     disponible: "VERDADERO"
+     horas_ultimo_mantenimiento: 50
+     necesita_mantenimiento: "FALSO"
+   6:
+     matricula: "DEF002"
+     tipo: "Comercial"
+     modelo: "Boeing 747"
+     fabricante: "Boeing"
+     propietario: "Owner 5"
+     horas_vuelo: 12563
+     capacidad_pasajeros: 416
+     peso_maximo_carga: 680
+     disponible: "FALSO"
+     horas_ultimo_mantenimiento: 132
+     necesita_mantenimiento: "VERDADERO"
+   7:
+     matricula: "GHI004"
+     tipo: "Privado"
+     modelo: "Learjet 75"
+     fabricante: "Bombardier"
+     propietario: "Owner 2"
+     horas_vuelo: 4521
+     capacidad_pasajeros: 8
+     peso_maximo_carga: 190
+     disponible: "VERDADERO"
+     horas_ultimo_mantenimiento: 350
+     necesita_mantenimiento: "FALSO"
+   8:
+     matricula: "JKL005"
+     tipo: "Cargo"
+     modelo: "Antonov An-225"
+     fabricante: "Antonov"
+     propietario: "Owner 6"
+     horas_vuelo: 9623
+     capacidad_pasajeros: 0
+     peso_maximo_carga: 2500
+     disponible: "VERDADERO"
+     horas_ultimo_mantenimiento: 200
+     necesita_mantenimiento: "FALSO"
+   9:
+     matricula: "MNO006"
+     tipo: "Privado"
+     modelo: "Cessna Citation X"
+     fabricante: "Cessna"
+     propietario: "Owner 4"
+     horas_vuelo: 3702
+     capacidad_pasajeros: 12
+     peso_maximo_carga: 250
+     disponible: "FALSO"
+     horas_ultimo_mantenimiento: 180
+     necesita_mantenimiento: "VERDADERO"
+   10:
+     matricula: "PQR007"
+     tipo: "Carga"
+     modelo: "Airbus A380"
+     fabricante: "Airbus"
+     propietario: "Owner 7"
+     horas_vuelo: 15463
+     capacidad_pasajeros: 853
+     peso_maximo_carga: 800
+     disponible: "VERDADERO"
+     horas_ultimo_mantenimiento: 240
+     necesita_mantenimiento: "FALSO"
+  
+
+
 
 
 directorio_empleados: 
