@@ -1,12 +1,12 @@
 from loguru import logger
-from Utils import general_functions as gf
-from Pasajero import Pasajero
+import general_functions as gf
+from ModuloPasajeros import Pasajeros
 from AvionHangares import Avion
 from typing import Optional, List, Dict
 
 
 class Vuelo:
-    def __init__(self, __config: dict, __menu_vuelo: Optional[list] = None, __PBT: Optional[object] = None):
+    def __init__(self, config: dict, menu=None, __PBT=None):
         """
         Constructor de la clase Vuelo.
 
@@ -15,17 +15,14 @@ class Vuelo:
             __menu_vuelo (list, opcional): Menú relacionado con vuelos.
             __PBT (object, opcional): Clase para la manipulación de datos.
         """
-        self.__config = __config
-        self.__menu_vuelo = __menu_vuelo
+        self.__config = config
+        self.__menu_vuelo = menu
         self.__PBT = __PBT
-        self.__pasajeros: List[Pasajero] = []
+        self.__pasajeros: List[Pasajeros] = []
         self.__avion: Optional[Avion] = None
         self.__peso_equipaje_total: float = 0.0
         self.__horas_vuelo_por_avion: Dict[str, float] = {}
         self.__verificado: bool = False
-        self.__cols_df_vuelo = self.__config["directorio_vuelos"]["dict_cols"]
-        self.__df_vuelos = self._leer_info_vuelos()
-        self.__dict_mensajes_filtro = self.__config["directorio_aviones"]["dict_mensajes"]["mensajes"]
 
     @property
     def PBT(self) -> Optional[object]:
@@ -35,19 +32,11 @@ class Vuelo:
     def config(self) -> dict:
         return self.__config
 
-    @property
-    def cols_df_vuelo(self) -> dict:
-        return self.__cols_df_vuelo
-
-    @property
-    def dict_mensajes(self) -> dict:
-        return self.__dict_mensajes_filtro
-
     def mostrar_menu(self) -> None:
         """
         Muestra el menú relacionado con vuelos.
         """
-        eleccion = self.__config["Menu"]["menu_opcion"][6]
+        eleccion = self.__config["Menu"]["menu_opcion"]["6"]
         gf.mostrar_menu_personalizado(eleccion, self.__menu_vuelo)
 
     def _leer_info_vuelos(self) -> dict:
@@ -64,13 +53,6 @@ class Vuelo:
         logger.info("Información de vuelos cargada correctamente.")
         return df_info_vuelos
 
-    def get_vuelos(self) -> dict:
-        """
-        Proporciona el DataFrame con los datos de los vuelos.
-        :return: DataFrame de vuelos.
-        """
-        return self.__df_vuelos
-
     def calcular_peso_total_equipaje(self) -> float:
         """
         Calcula el peso total del equipaje de todos los pasajeros en el vuelo.
@@ -80,7 +62,7 @@ class Vuelo:
         logger.info(f"Peso total del equipaje calculado: {self.__peso_equipaje_total} kg")
         return self.__peso_equipaje_total
 
-    def agregar_pasajero(self, pasajero: Pasajero) -> None:
+    def agregar_pasajero(self, pasajero: Pasajeros) -> None:
         """
         Agrega un pasajero al vuelo si hay capacidad disponible y el peso del equipaje no excede el límite permitido.
         
@@ -168,21 +150,13 @@ class Vuelo:
         """
         return self.__horas_vuelo_por_avion.get(matricula, 0.0)
 
-    def ejecutar_proceso_vuelos(self):
+    def ejecutar_proceso(self):
         """
         Ejecuta un proceso basado en la opción ingresada para los vuelos.
         """
         opcion_ingresada = input("Ingresa la opción a ejecutar:\n ")
         resultado = self.ejecutar_proceso_vuelo(opcion_ingresada)
         return resultado
-
-    def administrar_vuelos(self):
-        """
-        Administra los datos de vuelos seleccionando columnas específicas.
-        """
-        df_select = self.__PBT.Seleccionar_columnas_pd(
-            df=self.__df_vuelos, cols_elegidas=[*self.__cols_df_vuelo]
-        )
 
     def obtener_config_operaciones(self):
         """
@@ -223,7 +197,7 @@ class Vuelo:
         
         return gf.procesar_opcion(opcion=opcion, opciones=opciones)
 
-    def _solicitar_datos_pasajero(self) -> Pasajero:
+    def _solicitar_datos_pasajero(self) -> Pasajeros:
         """
         Solicita los datos de un pasajero para agregarlo al vuelo.
         Returns:
@@ -239,7 +213,7 @@ class Vuelo:
             logger.error(f"Entrada inválida: {e}")
 
 
-        return Pasajero(nombre=nombre, documento_identidad=documento_identidad, edad=edad)
+        return Pasajeros(nombre=nombre, documento_identidad=documento_identidad, edad=edad)
 
     def _solicitar_datos_avion(self) -> Avion:
         """

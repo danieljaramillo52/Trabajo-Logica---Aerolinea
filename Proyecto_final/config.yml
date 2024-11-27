@@ -164,12 +164,12 @@ directorio_pasajeros:
   nom_base: "pasajeros_sin_asiento.xlsx"
   nom_hoja: "sheet1"
   dict_cols: 
-    "nombre": "Nombre"
-    "documento_identidad": "Documento_Identidad"
-    "edad": "Edad"
-    "equipaje": "Equipaje"
-    "vuelo": "Vuelo"
-    "estado_reserva": "Estado_Reserva"
+    "nombre": "nombre"
+    "documento_identidad": "documento_identidad"
+    "edad": "edad"
+    "equipaje": "equipaje"
+    "vuelo": "vuelo"
+    "estado_reserva": "estado_reserva"
 
 directorio_empleados: 
   nom_base: "empleados.xlsx"
@@ -181,7 +181,7 @@ directorio_empleados:
     "Documento_Licencia": "Documento_Licencia"
     "Horas_Vuelo": "Horas_Vuelo"
     "Estado_Empleado": "Estado_Empleado"
-    "Estado_Empleado": "Estado_Empleado"
+    "Correo_Electronico": "Correo_Electronico"
     "Disponible": "Disponible"
     "Ubicacion": "Ubicacion"   
   
@@ -200,9 +200,8 @@ Menu:
     2.Ingresar a los procesos de gestión de Hangar
     3.Ingresar a los procesos de gestión de Empleado
     4.Ingresar a los procesos de gestión de Tripulación
-    5.Ingresar a los procesos de gestión de Mantenimiento
-    6.Ingresar a los procesos de gestión de Servicios
-    7.Ingresar a los procesos de gestión de Vuelo
+    5.Ingresar a los procesos de gestión de Servicios
+    6.Ingresar a los procesos de gestión de Vuelo
     8.Ingresar a los procesos de gestión de Pasajero
     0.Salir
   menu_opcion: &opciones_menu
@@ -210,9 +209,8 @@ Menu:
     "2" : "Hangar"
     "3" : "Empleado"
     "4" : "Tripulacion"
-    "5" : "Mantenimiento"
-    "6" : "Servicios"
-    "7" : "Vuelo"
+    "5" : "Servicios"
+    "6" : "Vuelo"
     "8" : "Pasajeros"
     "0" : "Salir"
 
@@ -230,3 +228,11 @@ directorio_menu:
 dict_constantes :
   "Salir" : "Salir"
 
+directorio_servicios:
+  nom_base: "servicios.xlsx"
+  nom_hoja: "Sheet1"
+  dict_cols:
+    "servicio_id": "ID_Servicio"
+    "descripcion": "Descripcion"
+    "costo": "Costo"
+    "estado": "Estado"

@@ -20,25 +20,12 @@ class Pasajeros:
         gf.mostrar_menu_personalizado(eleccion, self.__menu_pasajero)
 
     def ejecutar_proceso(self):
-        """
-        Ejecuta el proceso basado en la opción ingresada por el usuario.
 
-        Returns:
-            bool: Resultado del proceso ejecutado.
-        """
         opcion_ingresada = input("Ingresa la opción a ejecutar: ")
         return self.ejecutar_proceso_pasajero(opcion_ingresada)
 
     def ejecutar_proceso_pasajero(self, opcion: str) -> bool:
-        """
-        Ejecuta la opción seleccionada por el usuario.
 
-        Args:
-            opcion (str): Opción seleccionada.
-
-        Returns:
-            bool: True si debe continuar, False si debe detenerse.
-        """
         opciones = {
             "1": self.informacion_pasajero,
             "2": self.agregar_pasajero,
@@ -71,7 +58,6 @@ class Pasajeros:
     def agregar_pasajero(self):
         
         print("Ingrese los datos del nuevo pasajero: ")
-
         nombre = input("Nombre: ").strip()
         while not nombre.isalpha() or len(nombre) < 2:
             print("El nombre ingresado no es válido. Debe contener solo letras y al menos 2 caracteres.")
@@ -83,7 +69,7 @@ class Pasajeros:
             documento_identidad = input("Documento de identidad: ").strip()
 
         edad = input("Edad: ").strip()
-        while (edad < 0) or not edad.isdigit():
+        while int(edad) < 0 or not edad.isdigit():
             print("La edad ingresada no es válida. Debe ser un número entre 18 y 100.")
             edad = input("Edad: ").strip()
         edad = int(edad)
@@ -126,44 +112,88 @@ class Pasajeros:
         # Guardar cambios
         self.guardar_cambios()
 
-    def informacion_pasajero(self, documento_identidad):
+    def informacion_pasajero(self, documento_identidad=None):
+
+        if not documento_identidad:
+            documento_identidad = input("Ingrese el documento de identidad: ").strip()
+
+
         pasajero = self.__df_pasajeros[self.__df_pasajeros[self._cols_df_pasajeros["documento_identidad"]] == documento_identidad]
         if pasajero.empty:
             print(f"No se encontró ningún pasajero con documento de identidad {documento_identidad}.")
-            return
+        else:
+            print("Información del pasajero:")
+            print(pasajero)
+            
+    def informacion_pasajero(self, documento_identidad=None):
+        if not documento_identidad:
+            documento_identidad = input("Ingrese el documento de identidad: ").strip()
+        try:
+            # Asegurarse de que la columna existe
+            if self._cols_df_pasajeros["documento_identidad"] not in self.__df_pasajeros.columns:
+                print("Error: La columna de documento de identidad no existe en el DataFrame.")
+                return
+            
+            # Convertir ambos valores a cadenas y eliminar espacios adicionales
+            filtro_columna = self.__df_pasajeros[self._cols_df_pasajeros["documento_identidad"]].astype(str).str.strip()
+            documento_identidad = documento_identidad.strip()
+            
+            pasajero = self.__df_pasajeros[filtro_columna == documento_identidad]
+            
+            if pasajero.empty:
+                print(f"No se encontró ningún pasajero con documento de identidad {documento_identidad}.")
+            else:
+                print("Información del pasajero:")
+                print(pasajero)
+        except Exception as e:
+            print(f"Error al buscar información del pasajero: {e}")
 
-        print("Información del pasajero:")
-        print(pasajero)
+    def actualizar_datos_pasajero(self, documento_identidad=None, nombre=None, edad=None, peso=None):
+        if not documento_identidad:
+            documento_identidad = input("Ingrese el documento de identidad: ").strip()
 
-    def actualizar_datos_pasajero(self, documento_identidad, nombre=None, edad=None, peso=None):
-        pasajero = self.__df_pasajeros[self.__df_pasajeros[self._cols_df_pasajeros["documento_identidad"]] == documento_identidad].index
+        filtro_columna = self.__df_pasajeros[self._cols_df_pasajeros["documento_identidad"]].astype(str).str.strip()
+        documento_identidad = documento_identidad.strip()
+        pasajero = self.__df_pasajeros[filtro_columna == documento_identidad]
 
         if pasajero.empty:
             print(f"No se encontró ningún pasajero con documento de identidad {documento_identidad}.")
             return
 
-        if nombre:
-            self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["nombre"]] = nombre
-        if edad:
-            self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["edad"]] = edad
-        if peso:
-            self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["equipaje"]] = peso
+        index = pasajero.index[0]
 
-        print(f"Datos del pasajero con documento {documento_identidad} actualizados correctamente.")
+        if nombre is None:
+            nombre = input("Nuevo nombre (Enter para no cambiar): ").strip() or self.__df_pasajeros.at[index, self._cols_df_pasajeros["nombre"]]
+        if edad is None:
+            edad = input("Nueva edad (Enter para no cambiar): ").strip()
+            edad = int(edad) if edad else self.__df_pasajeros.at[index, self._cols_df_pasajeros["edad"]]
+        if peso is None:
+            peso = input("Nuevo peso (Enter para no cambiar): ").strip()
+            peso = float(peso) if peso else self.__df_pasajeros.at[index, self._cols_df_pasajeros["equipaje"]]
+
+        self.__df_pasajeros.at[index, self._cols_df_pasajeros["nombre"]] = nombre
+        self.__df_pasajeros.at[index, self._cols_df_pasajeros["edad"]] = edad
+        self.__df_pasajeros.at[index, self._cols_df_pasajeros["equipaje"]] = peso
+
+        print(f"Datos actualizados correctamente para el pasajero {documento_identidad}.")
         self.guardar_cambios()
 
-    def actualizar_reserva_pasajero(self, documento_identidad, vuelo=None, estado_reserva=None):
-        pasajero = self.__df_pasajeros[self.__df_pasajeros[self._cols_df_pasajeros["documento_identidad"]] == documento_identidad].index
 
+    def actualizar_reserva_pasajero(self, documento_identidad=None, vuelo=None, estado_reserva=None):
+        if not documento_identidad:
+            documento_identidad = input("Ingrese el documento de identidad: ").strip()
+        pasajero = self.__df_pasajeros[self.__df_pasajeros[self._cols_df_pasajeros["documento_identidad"]] == documento_identidad].index
         if pasajero.empty:
             print(f"No se encontró ningún pasajero con documento de identidad {documento_identidad}.")
             return
-
-        if vuelo:
-            self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["vuelo"]] = vuelo
-        if estado_reserva:
-            self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["estado_reserva"]] = estado_reserva
-
-        print(f"Reserva del pasajero con documento {documento_identidad} actualizada correctamente.")
+        if vuelo is None:
+            vuelo = input("Nuevo vuelo (Enter para no cambiar): ").strip() or self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["vuelo"]]
+        if estado_reserva is None:
+            estado_reserva = input("Nuevo estado de reserva (Enter para no cambiar): ").strip().capitalize()
+            if not estado_reserva:
+                estado_reserva = self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["estado_reserva"]]
+        self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["vuelo"]] = vuelo
+        self.__df_pasajeros.at[pasajero[0], self._cols_df_pasajeros["estado_reserva"]] = estado_reserva
+        print(f"Reserva actualizada correctamente para el pasajero {documento_identidad}.")
         self.guardar_cambios()
 

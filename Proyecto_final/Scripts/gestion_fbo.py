@@ -2,7 +2,8 @@ import config_path_routes
 import general_functions as gf
 from loguru import logger
 from transformation_functions import PandasBaseTransformer as PBT
-from Servicios import Servicios
+from ModuloServicios import Servicios
+from ModuloVuelo import Vuelo
 from ModuloTripulacion import Tripulacion, AdminTripulacion
 from AvionHangares import Avion, Hangar
 from ModuloEmpleado import Empleados, Empleado
@@ -50,33 +51,24 @@ class GestionFBO:
         self.gestionar_ciclo(hangar)
 
     def _gestionar_empleado(self, menu: dict):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        empleados = Empleados(self.config, menu, matricula)
+        empleados = Empleados(config=self.config, menu=menu)
         self.gestionar_ciclo(empleados)
 
-    def _gestionar_tripulacion(self, menu: dict):
-        
-        empleados_admin = Empleados(self.config)
-        
+    def _gestionar_tripulacion(self, menu: dict):        
+        empleados_admin = Empleados(self.config)        
         admin = AdminTripulacion(self.config,  menu, empleados_admin)
         self.gestionar_ciclo(admin)
         
 
-
-    def _gestionar_mantenimiento(self, menu: dict):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config, menu, matricula)
-        self.gestionar_ciclo(avion)
-
     def _gestionar_servicios(self, menu: dict):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config, menu, matricula)
-        self.gestionar_ciclo(avion)
+        #matricula = input("Ingrese una matricula de la lista a consultar: ")
+        servicio = Servicios(config=self.config, menu=menu)
+        self.gestionar_ciclo(servicio)
 
     def _gestionar_vuelo(self, menu: dict):
-        matricula = input("Ingrese una matricula de la lista a consultar: ")
-        avion = Avion(self.config, menu, matricula)
-        self.gestionar_ciclo(avion)
+        #matricula = input("Ingrese una matricula de la lista a consultar: ")
+        vuelo = Vuelo(config=self.config, menu=menu)
+        self.gestionar_ciclo(vuelo)
 
     def _gestionar_pasajero(self, menu: dict):
         pasajero = Pasajeros(config=self.config, menu=menu)
@@ -186,9 +178,8 @@ class GestionFBO:
             "2": ("Hangar", self._gestionar_hangar),
             "3": ("Empleado", self._gestionar_empleado),
             "4": ("Tripulacion", self._gestionar_tripulacion),
-            "5": ("Mantenimiento", self._gestionar_mantenimiento),
-            "6": ("Servicios", self._gestionar_servicios),
-            "7": ("Vuelo", self._gestionar_vuelo),
+            "5": ("Servicios", self._gestionar_servicios),
+            "6": ("Vuelo", self._gestionar_vuelo),
             "8": ("Pasajeros", self._gestionar_pasajero),
         }
 
