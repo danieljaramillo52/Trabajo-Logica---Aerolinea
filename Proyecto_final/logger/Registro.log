@@ -1,0 +1,10 @@
+2024-11-26 19:02:24.912 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 19:02:24.912273
+2024-11-26 19:02:24.950 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 19:02:31.410 | ERROR    | ModuloServicios:cargar_servicios_desde_excel:37 - Error al cargar los servicios desde el archivo Excel: too many values to unpack (expected 2)
+2024-11-26 19:02:42.143 | INFO     | ModuloServicios:generar_reporte_servicios:154 - Reporte de servicios generado exitosamente.
+2024-11-26 19:02:59.571 | INFO     | __main__:<module>:14 - Incio de un nuevo proceso:  2024-11-26 19:02:59.571950
+2024-11-26 19:02:59.592 | SUCCESS  | general_functions:Procesar_configuracion:142 - Proceso de obtención de configuración satisfactorio
+2024-11-26 19:03:24.871 | INFO     | ModuloPasajeros:_leer_info_pasajeros:39 - Leyendo información de pasajeros desde el archivo configurado...
+2024-11-26 19:03:24.922 | INFO     | ModuloPasajeros:_leer_info_pasajeros:42 - Información de pasajeros cargada correctamente.
+2024-11-26 19:03:55.910 | INFO     | ModuloEmpleado:_leer_info_empleados:25 - Leyendo información de empleados desde el archivo configurado...
+2024-11-26 19:03:55.935 | INFO     | ModuloEmpleado:_leer_info_empleados:31 - Información de empleados cargada correctamente.
